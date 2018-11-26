@@ -3,9 +3,13 @@ package com.hds.ssm.control;
 
 import com.hds.ssm.model.User;
 import com.hds.ssm.service.user.UserService;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+
 @CrossOrigin
 @Controller
 @RequestMapping("/api")
@@ -20,6 +24,7 @@ public class UserController {
     }
 
     @ResponseBody
+
     @PostMapping("/login")
     public boolean Login(@RequestBody User user)
     {
@@ -27,7 +32,9 @@ public class UserController {
         if(null!=temp)
         {
             if(temp.getPassword().equals(user.getPassword()))
+            {
                 return true;
+            }
         }
         return false;
     }
