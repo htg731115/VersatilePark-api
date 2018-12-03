@@ -19,7 +19,6 @@ public class UserController {
     private UserService UserService;
 
     @ResponseBody
-
     @PostMapping("/login")
     public boolean Login(@RequestBody User user)
     {
