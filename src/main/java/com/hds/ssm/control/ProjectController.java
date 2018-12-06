@@ -21,4 +21,11 @@ public class ProjectController {
     {
         return projectService.selectProject();
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/addproject",method = RequestMethod.POST)
+    public void AddProject(@RequestBody Project project)
+    {
+        projectService.addProject(project.getName(),project.getAddress(),project.getOpentime(),project.getArea(),project.getTotal_num(),project.getManage_num(),project.getState(),project.getAdmin_id());
+    }
 }

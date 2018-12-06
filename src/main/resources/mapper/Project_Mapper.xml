@@ -9,4 +9,8 @@
         FROM
           project_info
     </select>
+    <insert id="addProject">
+        INSERT INTO project_info (`name`, `address`, `opentime`, `area`, `total_num`, `manage_num`, `state`, `admin_id`)
+        VALUES (#{name},#{address},#{opentime},#{area},#{total_num},#{manage_num},#{state},#{admin_id});
+    </insert>
 </mapper>
