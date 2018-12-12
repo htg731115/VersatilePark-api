@@ -35,7 +35,7 @@ public class UserController {
     @ResponseBody
     @PostMapping("/addUser")
     public int addUser(@RequestBody User user){
-        UserService.addUser("3",user.getName(),user.getPassword());
+      //暂不写  UserService.addUser("3",user.getName(),user.getPassword());
        return 1;
     }
 

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ManagerService {
     List<Manager> GetManage();
+    Manager FindManage(int id);
 }

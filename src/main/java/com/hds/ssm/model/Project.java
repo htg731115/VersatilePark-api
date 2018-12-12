@@ -84,5 +84,15 @@ public class Project {
     private int manage_num;
     private int state;
     private int admin_id;
+
+    public String getManagername() {
+        return managername;
+    }
+
+    public void setManagername(String managername) {
+        this.managername = managername;
+    }
+
+    private String managername="";
 }
 

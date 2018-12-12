@@ -16,4 +16,9 @@ public class ManagerServiceImpl implements ManagerService {
     public List<Manager> GetManage() {
         return managerDao.GetManager();
     }
+
+    @Override
+    public Manager FindManage(int id) {
+        return managerDao.FindManager(id);
+    }
 }

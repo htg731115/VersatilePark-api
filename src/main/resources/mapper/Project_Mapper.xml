@@ -5,9 +5,9 @@
 
     <select id="selectProject" resultType="com.hds.ssm.model.Project">
         SELECT
-          id, name, address, opentime ,area ,total_num, manage_num, state,admin_id
+           p.id,p.name, address, opentime ,area ,total_num, manage_num, state,m.name "managername"
         FROM
-          project_info
+          project_info p INNER JOIN manager_info m on(p.admin_id=m.id)
     </select>
 
     <select id="findProject" resultType="com.hds.ssm.model.Project">
