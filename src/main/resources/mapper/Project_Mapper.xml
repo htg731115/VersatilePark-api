@@ -9,8 +9,14 @@
         FROM
           project_info
     </select>
+
+    <select id="findProject" resultType="com.hds.ssm.model.Project">
+        SELECT * FROM project_info where name=#{name}
+    </select>
+
     <insert id="addProject">
         INSERT INTO project_info (`name`, `address`, `opentime`, `area`, `total_num`, `manage_num`, `state`, `admin_id`)
         VALUES (#{name},#{address},#{opentime},#{area},#{total_num},#{manage_num},#{state},#{admin_id});
     </insert>
+
 </mapper>

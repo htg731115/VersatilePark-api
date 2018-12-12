@@ -16,7 +16,7 @@ public class ProjectController {
     private ProjectService projectService;
 
     @ResponseBody
-    @RequestMapping(value = "/getproject")
+    @RequestMapping(value = "/getproject",method = RequestMethod.GET)
     public List<Project> GetProject()
     {
         return projectService.selectProject();
@@ -24,8 +24,15 @@ public class ProjectController {
 
     @ResponseBody
     @RequestMapping(value = "/addproject",method = RequestMethod.POST)
-    public void AddProject(@RequestBody Project project)
+    public boolean AddProject(@RequestBody Project project)
     {
-        projectService.addProject(project.getName(),project.getAddress(),project.getOpentime(),project.getArea(),project.getTotal_num(),project.getManage_num(),project.getState(),project.getAdmin_id());
+        String PName=project.getName();
+        Project temp =projectService.findProject(PName);
+        if(null==temp) {
+            projectService.addProject(project.getName(), project.getAddress(), project.getOpentime(), project.getArea(), project.getTotal_num(), project.getManage_num(), project.getState(), project.getAdmin_id());
+            return true;
+        }
+        return false;
+
     }
 }

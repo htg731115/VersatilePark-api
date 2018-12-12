@@ -24,4 +24,9 @@ public class ProjectServiceImpl implements ProjectService{
         projectDao.addProject(name,address,opentime,area,total_num,manage_num,state,admin_id);
     }
 
+    @Override
+    public Project findProject(String name) {
+        return projectDao.findProject(name);
+    }
+
 }
