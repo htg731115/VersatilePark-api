@@ -11,7 +11,11 @@
     </select>
 
     <select id="findProject" resultType="com.hds.ssm.model.Project">
-        SELECT * FROM project_info where name=#{name}
+        SELECT
+           p.id,p.name, address, opentime ,area ,total_num, manage_num, state,m.name "managername"
+        FROM
+          project_info p INNER JOIN manager_info m on(p.admin_id=m.id)
+        Where p.name=#{name}
     </select>
 
     <insert id="addProject">

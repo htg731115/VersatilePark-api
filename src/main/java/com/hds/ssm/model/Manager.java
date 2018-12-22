@@ -15,10 +15,18 @@ public class Manager {
         return name;
     }
 
+    public String getProject() {
+        return Project;
+    }
+
+    public void setProject(String project) {
+        Project = project;
+    }
+
+    public String Project;
     public void setName(String name) {
         this.name = name;
     }
-
     private String name;
 
 }

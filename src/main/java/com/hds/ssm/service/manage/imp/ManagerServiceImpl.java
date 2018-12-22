@@ -1,5 +1,7 @@
 package com.hds.ssm.service.manage.imp;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hds.ssm.dao.ManagerDao;
 import com.hds.ssm.model.Manager;
 import com.hds.ssm.service.manage.ManagerService;
@@ -18,7 +20,20 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
+    public PageInfo<Manager> GetManage2(Integer pageNum) {
+        PageHelper.startPage(pageNum,6);
+        List<Manager>ManagerList=managerDao.GetManager2();
+        PageInfo<Manager> pageInfo =new PageInfo<>(ManagerList);
+        return pageInfo;
+    }
+
+    @Override
     public Manager FindManage(int id) {
         return managerDao.FindManager(id);
+    }
+
+    @Override
+    public void DelManager(Integer id) {
+         managerDao.DelManager(id);
     }
 }

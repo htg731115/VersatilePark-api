@@ -1,12 +1,13 @@
 package com.hds.ssm.service.project;
 
+import com.github.pagehelper.PageInfo;
 import com.hds.ssm.model.Project;
 
 import java.util.Date;
 import java.util.List;
 
 public interface ProjectService {
-    List<Project> selectProject();
+    PageInfo<Project> selectProject(Integer pageNum,Integer pageSize);
     void addProject(String name,
                     String address,
                     Date opentime,

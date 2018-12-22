@@ -5,4 +5,12 @@
     <select id="GetManager" resultType="com.hds.ssm.model.Manager">
         select * from manager_info
     </select>
+    <select id="GetManager2" resultType="com.hds.ssm.model.Manager">
+   select m.id id ,m.name ,p.address Project
+    from manager_info m,project_info p
+    where p.admin_id=m.id
+    </select>
+    <delete id="DelManager" >
+        DELETE FROM manager_info WHERE id=#{id}
+    </delete>
 </mapper>

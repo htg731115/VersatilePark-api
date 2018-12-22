@@ -1,5 +1,6 @@
 package com.hds.ssm.control;
 
+import com.github.pagehelper.PageInfo;
 import com.hds.ssm.model.Project;
 import com.hds.ssm.service.project.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,9 @@ public class ProjectController {
 
     @ResponseBody
     @RequestMapping(value = "/getproject",method = RequestMethod.GET)
-    public List<Project> GetProject()
+    public PageInfo<Project> GetProject(@RequestParam("pageNum") Integer pageNum,@RequestParam("pageSize")Integer pageSize)
     {
-        return projectService.selectProject();
+        return projectService.selectProject(pageNum,pageSize);
     }
 
     @ResponseBody
@@ -34,5 +35,12 @@ public class ProjectController {
         }
         return false;
 
+    }
+    @ResponseBody
+    @RequestMapping(value = "/searchproject",method = RequestMethod.GET)
+    public Project SearchProject(@RequestParam("name") String name)
+    {
+        Project temp =projectService.findProject(name);
+        return temp;
     }
 }

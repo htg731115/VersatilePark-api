@@ -1,5 +1,7 @@
 package com.hds.ssm.service.project.imp;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hds.ssm.dao.ProjectDao;
 import com.hds.ssm.model.Project;
 import com.hds.ssm.service.project.ProjectService;
@@ -15,8 +17,11 @@ public class ProjectServiceImpl implements ProjectService{
     private ProjectDao projectDao;
 
     @Override
-    public List<Project> selectProject() {
-        return projectDao.selectProject();
+    public PageInfo<Project> selectProject(Integer pageNum,Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<Project> userInfoList = projectDao.selectProject();
+        PageInfo<Project> pageInfo = new PageInfo<>(userInfoList);
+        return pageInfo;
     }
 
     @Override
