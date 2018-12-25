@@ -6,9 +6,13 @@
         select * from manager_info
     </select>
     <select id="GetManager2" resultType="com.hds.ssm.model.Manager">
-   select m.id id ,m.name ,p.address Project
-    from manager_info m,project_info p
-    where p.admin_id=m.id
+       select m.id id ,m.name ,p.address Project
+        from manager_info m left join project_info p on(m.id=p.admin_id)
+    </select>
+    <select id="FindManager" resultType="com.hds.ssm.model.Manager">
+       select m.id,m.name,Sex,id_Num,In_time,Phone_Num,p.name 'project'
+        from manager_info m left join project_info p on(m.id=p.admin_id)
+        where m.id=#{id}
     </select>
     <delete id="DelManager" >
         DELETE FROM manager_info WHERE id=#{id}

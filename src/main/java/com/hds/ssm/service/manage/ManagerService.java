@@ -10,5 +10,4 @@ public interface ManagerService {
     PageInfo<Manager> GetManage2(Integer pageNum);
     Manager FindManage(int id);
     void DelManager(Integer id) ;
-
 }

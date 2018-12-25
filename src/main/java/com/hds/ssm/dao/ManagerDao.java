@@ -11,5 +11,5 @@ public interface ManagerDao {
     List<Manager> GetManager2();
     Manager FindManager(@Param("id")int id);
     void DelManager(@Param("id")Integer id);
-
+    Manager GetDetails(@Param("id") Integer id);
 }

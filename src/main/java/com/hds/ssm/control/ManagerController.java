@@ -24,11 +24,20 @@ public class ManagerController {
         return managerService.GetManage();
     }
 
+
     @ResponseBody
     @RequestMapping(value = "/getmanager2",method = RequestMethod.GET)//进行分页处理
     public PageInfo<Manager> GetManager2(@RequestParam("pageNum") Integer pageNum)
     {
         return managerService.GetManage2(pageNum);
+    }
+
+    @ResponseBody
+    @RequestMapping(value="/findmanager",method=RequestMethod.GET)
+    public Manager GetDetails(@RequestParam("id")  int id)
+    {
+        Manager temp= managerService.FindManage(id);
+        return temp;
     }
 
     @ResponseBody
