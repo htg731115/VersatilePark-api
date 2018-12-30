@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hds.ssm.dao.CustomerDao">
+    <select id="GetCustomer" resultType="com.hds.ssm.model.Customer">
+        select c_id,c_name,c_phone,sex,plate_num,p.name 'project'
+        from customer_info c LEFT JOIN project_info p on (c.parking_id=p.id)
+    </select>
+    <select id="GetTotal" resultType="java.lang.Integer">
+        select count(*)
+        from customer_info
+    </select>
+    <select id="GetCertNum" resultType="java.lang.Integer">
+        select count(id)
+        from certification
+        where status=2
+    </select>
+    <select id="GetCertCustomer" resultType="com.hds.ssm.model.Customer">
+        select c_id,c_name,c_phone,sex,plate_num,p.name 'project'
+        from customer_info c LEFT JOIN project_info p on (c.parking_id=p.id),certification
+        where c_id=certification.id 
+    </select>
+</mapper>

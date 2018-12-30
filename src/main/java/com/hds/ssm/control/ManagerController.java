@@ -1,6 +1,5 @@
 package com.hds.ssm.control;
 
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hds.ssm.model.Manager;
 import com.hds.ssm.service.manage.ManagerService;
