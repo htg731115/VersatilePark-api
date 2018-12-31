@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @Controller
@@ -22,7 +23,11 @@ public class ProjectController {
     {
         return projectService.selectProject(pageNum,pageSize);
     }
-
+    @ResponseBody
+    @RequestMapping(value="/getemptyproject",method = RequestMethod.GET)
+    public List<Project> GetEmptyProject(){
+        return projectService.getEmptyProject();
+    }
     @ResponseBody
     @RequestMapping(value = "/addproject",method = RequestMethod.POST)
     public boolean AddProject(@RequestBody Project project)
@@ -42,5 +47,14 @@ public class ProjectController {
     {
         Project temp =projectService.findProject(name);
         return temp;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/alterproject",method = RequestMethod.POST)
+    public void AlterProject(@RequestBody Map<String,Object> map)
+    {
+        Integer admin_id=Integer.parseInt(map.get("admin_id").toString());
+        String project=map.get("project").toString();
+        projectService.alterPorject(admin_id,project);
     }
 }

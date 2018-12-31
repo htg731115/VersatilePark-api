@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface ProjectService {
     PageInfo<Project> selectProject(Integer pageNum,Integer pageSize);
+    List<Project> getEmptyProject();
+    void alterPorject(int admin_id,String project);
     void addProject(String name,
                     String address,
                     Date opentime,

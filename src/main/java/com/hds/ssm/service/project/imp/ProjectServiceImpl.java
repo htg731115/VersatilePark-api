@@ -25,6 +25,17 @@ public class ProjectServiceImpl implements ProjectService{
     }
 
     @Override
+    public List<Project> getEmptyProject() {
+        return projectDao.getEmptyProject();
+    }
+
+    @Override
+    public void alterPorject(int admin_id, String project) {
+        projectDao.clearProject(admin_id);
+        projectDao.alterProject(admin_id,project);
+    }
+
+    @Override
     public void addProject(String name, String address, Date opentime, int area, int total_num, int manage_num, int state, int admin_id) {
         projectDao.addProject(name,address,opentime,area,total_num,manage_num,state,admin_id);
     }

@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface ProjectDao {
     List<Project> selectProject();
+    List<Project> getEmptyProject();
+    void alterProject(@Param("admin_id")int admin_id,@Param("project") String project);
+    void clearProject(@Param("admin_id") int admin_id);
     void addProject(@Param("name")String name,
                     @Param("address")     String address,
                     @Param("opentime")Date opentime,

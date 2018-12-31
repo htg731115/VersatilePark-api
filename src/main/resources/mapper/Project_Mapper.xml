@@ -9,7 +9,12 @@
         FROM
           project_info p left JOIN manager_info m on(p.admin_id=m.id)
     </select>
-
+    <select id="getEmptyProject" resultType="com.hds.ssm.model.Project">
+        SELECT
+          id,name
+        FROM project_info
+        Where admin_id=0
+    </select>
     <select id="findProject" resultType="com.hds.ssm.model.Project">
         SELECT
            p.id,p.name, address, opentime ,area ,total_num, manage_num, state,m.name "managername"
@@ -22,5 +27,10 @@
         INSERT INTO project_info (`name`, `address`, `opentime`, `area`, `total_num`, `manage_num`, `state`, `admin_id`)
         VALUES (#{name},#{address},#{opentime},#{area},#{total_num},#{manage_num},#{state},#{admin_id});
     </insert>
-
+    <update id="clearProject">
+        UPDATE project_info SET admin_id=0 where admin_id=#{admin_id}
+    </update>
+    <update id="alterProject">
+        UPDATE project_info SET admin_id=#{admin_id} where id=#{project}
+    </update>
 </mapper>
