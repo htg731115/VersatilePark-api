@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hds.ssm.dao.EvaluationDao">
+    <select id="getGoodEval" resultType="java.lang.Integer">
+        SELECT count(customer_id)
+        FROM evaluation
+        WHERE degress=1
+    </select>
+    <select id="getMiddleEval" resultType="java.lang.Integer">
+        SELECT count(customer_id)
+        FROM evaluation
+        WHERE degress=2
+    </select>
+    <select id="getBadEval" resultType="java.lang.Integer">
+        SELECT count(customer_id)
+        FROM evaluation
+        WHERE degress=3
+    </select>
+    <select id="getAllEvalList" resultType="com.hds.ssm.model.Evaluation">
+        SELECT * FROM evaluation
+    </select>
+    <select id="getGoodEvalList" resultType="com.hds.ssm.model.Evaluation">
+        SELECT customer_id,project_id,degress,create_time,handler_status FROM evaluation WHERE degress=1
+    </select>
+
+    <select id="getMiddleEvalList" resultType="com.hds.ssm.model.Evaluation">
+        SELECT * FROM evaluation WHERE degress=2
+    </select>
+
+    <select id="getBadEvalList" resultType="com.hds.ssm.model.Evaluation">
+        SELECT * FROM evaluation WHERE degress=3
+    </select>
+    <select id="getAll" resultType="com.hds.ssm.model.Evaluation">
+        SELECT * FROM evaluation
+    </select>
+
+</mapper>
