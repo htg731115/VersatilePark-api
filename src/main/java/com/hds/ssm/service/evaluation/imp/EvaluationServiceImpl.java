@@ -46,9 +46,10 @@ public class EvaluationServiceImpl implements EvaluationService {
         return pageInfo;
     }
 
+
     @Override
-    public PageInfo<Evaluation> getMiddleEvalList(Integer pageNum,Integer n) {
-        PageHelper.startPage(pageNum,n);
+    public PageInfo<Evaluation> getMiddleEvalList(Integer pageNum) {
+        PageHelper.startPage(pageNum,10);
         List<Evaluation> middleEvalList = evaluationDao.getMiddleEvalList();
         PageInfo<Evaluation> pageInfo = new PageInfo<>(middleEvalList);
         return pageInfo;

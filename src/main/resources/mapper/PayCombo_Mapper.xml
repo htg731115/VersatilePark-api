@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hds.ssm.dao.PayComboDao">
+    <select id="getCommonPayCombo" resultType="com.hds.ssm.model.PayCombo">
+        SELECT combo_name,effective_length,money
+        FROM pay_combo
+        WHERE combo_id=0;
+    </select>
+</mapper>
