@@ -31,16 +31,9 @@ public class EvaluationController {
         evalNumMap.put("bad",badEval);
         return evalNumMap;
     }
+
     @ResponseBody
     @RequestMapping(value="/getEvalList",method = RequestMethod.GET)
-    public PageInfo<Evaluation>GetCertCustomer(@RequestParam("type") String type){
-        if("好评".equals(type)){
-            return evaluationService.getGoodEvalList(1);
-        }
-        return evaluationService.getAll();
-    }
-    @ResponseBody
-    @RequestMapping(value="/getEvalList2",method = RequestMethod.GET)
     public PageInfo<Evaluation>getEvalList(@RequestParam("pageNum") Integer pageNum, @RequestParam("type") String type){
         if("好评".equals(type)){
             return evaluationService.getGoodEvalList(pageNum);
@@ -52,4 +45,17 @@ public class EvaluationController {
             return evaluationService.getAllEvalList(pageNum);
         }
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/search-evalbyid",method = RequestMethod.GET)
+    public PageInfo<Evaluation> searchListById(@RequestParam("pageNum") Integer pageNum, @RequestParam("project_id") Integer project_id){
+        return evaluationService.searchListById(pageNum,project_id);
+    }
+
+    @ResponseBody
+    @RequestMapping(value="/search-evalbyname",method = RequestMethod.GET)
+    public PageInfo<Evaluation>  searchListByname(@RequestParam("pageNum") Integer pageNum, @RequestParam("customer_name") String customer_name,@RequestParam("project_id") int project_id){
+        return evaluationService.searchListByName(pageNum,customer_name,project_id);
+    }
+
 }

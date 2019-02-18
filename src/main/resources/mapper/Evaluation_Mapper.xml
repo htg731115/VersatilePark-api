@@ -30,7 +30,16 @@
     <select id="getBadEvalList" resultType="com.hds.ssm.model.Evaluation">
         SELECT * FROM evaluation WHERE degress=3
     </select>
-    <select id="getAll" resultType="com.hds.ssm.model.Evaluation">
+    <select id="searchListById" resultType="com.hds.ssm.model.Evaluation">
+        SELECT * FROM evaluation WHERE project_id=#{project_id}
+    </select>
+    <select id="searchListByName" resultType="com.hds.ssm.model.Evaluation">
+        SELECT * FROM evaluation e LEFT JOIN customer_info c on(e.customer_id=c.c_id) where c.c_name=#{customer_name}
+        <if test="project_id!=NULL">
+            AND e.project_id = #{project_id}
+        </if>
+    </select>
+    <select id="getAll" resultType="com.hds.ssm.model.Evaluation" >
         SELECT * FROM evaluation
     </select>
 

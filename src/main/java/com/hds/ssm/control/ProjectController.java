@@ -23,6 +23,12 @@ public class ProjectController {
     {
         return projectService.selectProject(pageNum,pageSize);
     }
+
+    @ResponseBody
+    @RequestMapping(value="/getallproject",method = RequestMethod.GET)
+    public List<Project> GetAllProject(){
+        return projectService.getAllProject();
+    }
     @ResponseBody
     @RequestMapping(value="/getemptyproject",method = RequestMethod.GET)
     public List<Project> GetEmptyProject(){

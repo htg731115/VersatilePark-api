@@ -20,4 +20,5 @@ public interface ProjectDao {
                     @Param("state")int state,
                     @Param("admin_id") int admin_id);
     Project findProject(@Param("name") String name);
+    List<Project> getAllProject();
 }

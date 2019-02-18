@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-
 <mapper namespace="com.hds.ssm.dao.ProjectDao" >
-
+    <select id="getAllProject" resultType="com.hds.ssm.model.Project">
+        SELECT id,name
+        from project_info
+    </select>
     <select id="selectProject" resultType="com.hds.ssm.model.Project">
         SELECT
            p.id,p.name, address, opentime ,area ,total_num, manage_num, state,m.name "managername"
@@ -22,6 +24,7 @@
           project_info p left JOIN manager_info m on(p.admin_id=m.id)
         Where p.name=#{name}
     </select>
+
 
     <insert id="addProject">
         INSERT INTO project_info (`name`, `address`, `opentime`, `area`, `total_num`, `manage_num`, `state`, `admin_id`)
