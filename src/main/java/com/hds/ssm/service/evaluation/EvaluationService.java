@@ -13,5 +13,5 @@ public interface EvaluationService {
     PageInfo<Evaluation> getBadEvalList(Integer pageNum);
     PageInfo<Evaluation> getAllEvalList(Integer pageNum);
     PageInfo<Evaluation> searchListById(Integer pageNum,Integer project_id);
-    PageInfo<Evaluation> searchListByName(Integer pageNum,String customer_name,int project_id);
+    PageInfo<Evaluation> searchListByName(Integer pageNum,String customer_name,Integer project_id);
 }

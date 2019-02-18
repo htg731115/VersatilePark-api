@@ -54,7 +54,7 @@ public class EvaluationController {
 
     @ResponseBody
     @RequestMapping(value="/search-evalbyname",method = RequestMethod.GET)
-    public PageInfo<Evaluation>  searchListByname(@RequestParam("pageNum") Integer pageNum, @RequestParam("customer_name") String customer_name,@RequestParam("project_id") int project_id){
+    public PageInfo<Evaluation>  searchListByname(@RequestParam("pageNum") Integer pageNum, @RequestParam("customer_name") String customer_name,@RequestParam("project_id") Integer project_id){
         return evaluationService.searchListByName(pageNum,customer_name,project_id);
     }
 

@@ -15,5 +15,5 @@ public interface EvaluationDao {
     List<Evaluation> getBadEvalList();
     List<Evaluation> getAllEvalList();
     List<Evaluation> searchListById(@Param("project_id") Integer project_id);
-    List<Evaluation> searchListByName(@Param("customer_name") String customer_name, @Param("project_id") int project_id);
+    List<Evaluation> searchListByName(@Param("customer_name") String customer_name, @Param("project_id") Integer project_id);
 }

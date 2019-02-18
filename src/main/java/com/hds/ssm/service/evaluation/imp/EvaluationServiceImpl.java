@@ -80,7 +80,7 @@ public class EvaluationServiceImpl implements EvaluationService {
     }
 
     @Override
-    public PageInfo<Evaluation> searchListByName(Integer pageNum, String customer_name, int project_id) {
+    public PageInfo<Evaluation> searchListByName(Integer pageNum, String customer_name, Integer project_id) {
         PageHelper.startPage(pageNum,10);
         List<Evaluation> evalList = evaluationDao.searchListByName(customer_name,project_id);
         PageInfo<Evaluation> pageInfo = new PageInfo<>(evalList);

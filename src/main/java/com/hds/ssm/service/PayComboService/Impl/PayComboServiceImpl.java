@@ -14,4 +14,9 @@ public class PayComboServiceImpl implements PayComboService {
     public PayCombo getCommonPayCombo() {
         return payComboDao.getCommonPayCombo();
     }
+
+    @Override
+    public void editCommonPayCombo() {
+        payComboDao.editCommonPayCombo();
+    }
 }

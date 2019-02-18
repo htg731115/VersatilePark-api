@@ -35,7 +35,7 @@
     </select>
     <select id="searchListByName" resultType="com.hds.ssm.model.Evaluation">
         SELECT * FROM evaluation e LEFT JOIN customer_info c on(e.customer_id=c.c_id) where c.c_name=#{customer_name}
-        <if test="project_id!=NULL">
+        <if test="project_id!=null">
             AND e.project_id = #{project_id}
         </if>
     </select>

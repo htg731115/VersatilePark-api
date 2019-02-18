@@ -6,4 +6,7 @@
         FROM pay_combo
         WHERE combo_id=0;
     </select>
+    <update id="editCommonPayCombo">
+        UPDATE pay_combo p SET p.  WHERE (`combo_id`='0');
+    </update>
 </mapper>
