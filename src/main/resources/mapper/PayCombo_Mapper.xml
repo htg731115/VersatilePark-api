@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hds.ssm.dao.PayComboDao">
-    <select id="getCommonPayCombo" resultType="com.hds.ssm.model.PayCombo">
+    <select id="getPayComboById" resultType="com.hds.ssm.model.PayCombo">
         SELECT combo_name,effective_length,money
         FROM pay_combo
-        WHERE combo_id=0;
+        WHERE combo_id=#{combo_id};
     </select>
 
     <select id="getLogPayCombo" resultType="com.hds.ssm.model.PayCombo">
-        SELECT id,effective_length,bf_combo_name as 'combo_name' ,bf_money as 'money'
+        SELECT id,effective_length,bf_combo_name as 'combo_name' ,bf_money as 'money',alter_time
         FROM log_pay_combo
         WHERE combo_id=#{combo_id}
+        order by alter_time desc
+        LIMIT 6
     </select>
-    <update id="editCommonPayCombo">
-        UPDATE pay_combo p SET combo_name = #{combo_name},effective_length = #{effective_length},money = #{money}  WHERE (`combo_id`='0');
+    <update id="editPayCombo">
+        UPDATE pay_combo p SET combo_name = #{combo_name},effective_length = #{effective_length},money = #{money}  WHERE (`combo_id`=#{combo_id});
     </update>
 
     <insert id="insertLogPayCombo">
@@ -21,7 +23,7 @@
         `combo_id`,
         `bf_combo_name`,
         `effective_length`,
-        `bf_ef_money`,
+        `bf_money`,
         `manage_id`,
         `alter_time`)
         VALUES(

@@ -1,9 +1,8 @@
-package com.hds.ssm.service.PayComboService.Impl;
+package com.hds.ssm.service.paycombo.Impl;
 
 import com.hds.ssm.dao.PayComboDao;
 import com.hds.ssm.model.PayCombo;
-import com.hds.ssm.service.PayComboService.PayComboService;
-import org.apache.ibatis.annotations.Param;
+import com.hds.ssm.service.paycombo.PayComboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +15,17 @@ public class PayComboServiceImpl implements PayComboService {
     private PayComboDao payComboDao;
     @Override
     public PayCombo getCommonPayCombo() {
-        return payComboDao.getCommonPayCombo();
+        return payComboDao.getPayComboById(1);
+    }
+
+    @Override
+    public PayCombo getDefaultPayCombo() {
+        return payComboDao.getPayComboById(0);
     }
 
     @Override
     public void editCommonPayCombo(String combo_name, Integer effective_length, Double money) {
-        payComboDao.editCommonPayCombo(combo_name,effective_length,money);
+        payComboDao.editPayCombo(1,combo_name,effective_length,money);
     }
 
     @Override
