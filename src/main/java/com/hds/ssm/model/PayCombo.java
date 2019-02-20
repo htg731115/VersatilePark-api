@@ -67,4 +67,24 @@ public class PayCombo {
     public void setEnd_time(Date end_time) {
         this.end_time = end_time;
     }
+
+    public Date getAlter_time() {
+        return alter_time;
+    }
+
+    public void setAlter_time(Date alter_time) {
+        this.alter_time = alter_time;
+    }
+
+    public Date alter_time;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int id;
 }
