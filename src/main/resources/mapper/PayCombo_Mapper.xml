@@ -8,7 +8,7 @@
     </select>
 
     <select id="getLogPayCombo" resultType="com.hds.ssm.model.PayCombo">
-        SELECT 
+        SELECT id,effective_length,bf_combo_name as 'combo_name' ,bf_money as 'money'
         FROM log_pay_combo
         WHERE combo_id=#{combo_id}
     </select>
