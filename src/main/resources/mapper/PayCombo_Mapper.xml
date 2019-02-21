@@ -6,7 +6,19 @@
         FROM pay_combo
         WHERE combo_id=#{combo_id};
     </select>
-
+    <select id="getPaycomboList" resultType="com.hds.ssm.model.PayComboListRQ">
+        SELECT
+            combo_id,
+            combo_name,
+            effective_length,
+            start_time,
+            end_time,
+            b.NAME AS 'manager_name',
+            p.NAME AS 'project_name'
+        FROM
+            pay_combo a  LEFT JOIN manager_info b ON (a.manager_id = b.id)  LEFT JOIN project_info p ON (a.project_id = p.id)
+        WHERE a.combo_id not IN (0,1)
+    </select>
     <select id="getLogPayCombo" resultType="com.hds.ssm.model.PayCombo">
         SELECT id,effective_length,bf_combo_name as 'combo_name' ,bf_money as 'money',alter_time
         FROM log_pay_combo
@@ -16,6 +28,12 @@
     </select>
     <update id="editPayCombo">
         UPDATE pay_combo p SET combo_name = #{combo_name},effective_length = #{effective_length},money = #{money}  WHERE (`combo_id`=#{combo_id});
+        <if test="start_time != null">
+          AND start_time =#{start_time}
+        </if>
+        <if test="end_time">
+          AND end_time =#{end_time}
+        </if>
     </update>
 
     <insert id="insertLogPayCombo">
@@ -35,4 +53,8 @@
            #{alter_time}
         )
     </insert>
+
+    <delete id="deletePayCombo" >
+        DELETE  FROM pay_combo where combo_id=#{combo_id}
+    </delete>
 </mapper>

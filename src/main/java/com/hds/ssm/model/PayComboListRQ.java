@@ -2,25 +2,42 @@ package com.hds.ssm.model;
 
 import java.util.Date;
 
-public class PayCombo {
-
+public class PayComboListRQ {
     private int combo_id;
     private int project_id;
     private int effective_length;
     private double money;
     private Date start_time;
     private Date end_time;
-    private String combo_name;
 
-    public int getManager_id() {
+    public String getProject_name() {
+        return project_name;
+    }
+
+    public void setProject_name(String project_name) {
+        this.project_name = project_name;
+    }
+
+    public String getManager_name() {
+        return manager_name;
+    }
+
+    public void setManager_name(String manager_name) {
+        this.manager_name = manager_name;
+    }
+
+    public String getManager_id() {
         return manager_id;
     }
 
-    public void setManager_id(int manager_id) {
+    public void setManager_id(String manager_id) {
         this.manager_id = manager_id;
     }
 
-    private int manager_id;
+    private String combo_name;
+    private String project_name;
+    private String manager_name;
+    private String manager_id;
     public String getCombo_name() {
         return combo_name;
     }
