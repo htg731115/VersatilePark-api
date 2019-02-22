@@ -13,6 +13,8 @@
             effective_length,
             start_time,
             end_time,
+            money,
+            p.id AS 'project_id',
             b.NAME AS 'manager_name',
             p.NAME AS 'project_name'
         FROM
@@ -27,13 +29,16 @@
         LIMIT 6
     </select>
     <update id="editPayCombo">
-        UPDATE pay_combo p SET combo_name = #{combo_name},effective_length = #{effective_length},money = #{money}  WHERE (`combo_id`=#{combo_id});
+        UPDATE pay_combo p SET combo_name = #{combo_name},effective_length = #{effective_length},money = #{money}
         <if test="start_time != null">
-          AND start_time =#{start_time}
+            ,start_time =#{start_time}
         </if>
         <if test="end_time">
-          AND end_time =#{end_time}
+            ,end_time =#{end_time}
         </if>
+        WHERE (`combo_id`=#{combo_id});
+
+
     </update>
 
     <insert id="insertLogPayCombo">
