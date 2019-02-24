@@ -1,5 +1,6 @@
 package com.hds.ssm.control;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.hds.ssm.model.PayCombo;
 import com.hds.ssm.model.PayComboListRQ;
@@ -65,5 +66,12 @@ public class PayComboController {
     @RequestMapping(value = "/delete-paycombo", method = RequestMethod.POST)
     public void deletePayCombo(@RequestParam("combo_id") Integer combo_id){
          payComboService.deletePayCombo(combo_id);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/search-combo-byName", method = RequestMethod.GET)
+    public PageInfo<PayComboListRQ> searchComboByName(@RequestParam("combo_name") String combo_name,@RequestParam("project_name") String project_name,
+                                                      @RequestParam("pageNum") Integer pageNum,@RequestParam("pageSize") Integer pageSize){
+        return payComboService.searchComboByName(combo_name,project_name,pageNum,pageSize);
     }
 }

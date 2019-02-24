@@ -63,4 +63,12 @@ public class PayComboServiceImpl implements PayComboService {
     public void editPayCombo(Integer combo_id,String combo_name, Integer effective_length, Double money, Date start_time, Date end_time) {
         payComboDao.editPayCombo(combo_id,combo_name,effective_length,money, start_time, end_time);
     }
+
+    @Override
+    public PageInfo<PayComboListRQ> searchComboByName(String combo_name, String project_name,Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<PayComboListRQ> payComboListRQS = payComboDao.searchComboByName(combo_name, project_name);
+        PageInfo<PayComboListRQ> pageInfo = new PageInfo<>(payComboListRQS);
+        return pageInfo;
+    }
 }

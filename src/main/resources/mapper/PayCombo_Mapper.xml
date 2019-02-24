@@ -28,6 +28,32 @@
         order by alter_time desc
         LIMIT 6
     </select>
+    <select id="searchComboByName" resultType="com.hds.ssm.model.PayComboListRQ">
+         SELECT
+            combo_id,
+            combo_name,
+            effective_length,
+            start_time,
+            end_time,
+            money,
+            p.id AS 'project_id',
+            b.NAME AS 'manager_name',
+            p.NAME AS 'project_name'
+        FROM
+             pay_combo a  LEFT JOIN manager_info b ON (a.manager_id = b.id)  LEFT JOIN project_info p ON (a.project_id = p.id)
+        <if test="project_name !=null and !''.equals(project_name.trim()) and combo_name !=null and !''.equals(combo_name.trim()) ">
+        <where>
+            <if test="project_name !=null and !''.equals(project_name.trim()) ">
+              project_name=#{project_name}
+            </if>
+            <if test="combo_name !=null and !''.equals(combo_name.trim())">
+              combo_name=#{combo_name}
+            </if>
+        </where>
+
+        </if>
+    </select>
+
     <update id="editPayCombo">
         UPDATE pay_combo p SET combo_name = #{combo_name},effective_length = #{effective_length},money = #{money}
         <if test="start_time != null">
