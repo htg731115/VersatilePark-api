@@ -74,4 +74,10 @@ public class PayComboController {
                                                       @RequestParam("pageNum") Integer pageNum,@RequestParam("pageSize") Integer pageSize){
         return payComboService.searchComboByName(combo_name,project_name,pageNum,pageSize);
     }
+
+//    @ResponseBody
+//    @RequestMapping(value = "/get-logCombo", method = RequestMethod.GET)
+//    public PageInfo<PayComboListRQ> getLogCombo(@RequestParam("combo_name") String comboName, @RequestParam("project_name") String projectName){
+//        return payComboService.getLogPayCombo()
+//    }
 }

@@ -41,17 +41,16 @@
             p.NAME AS 'project_name'
         FROM
              pay_combo a  LEFT JOIN manager_info b ON (a.manager_id = b.id)  LEFT JOIN project_info p ON (a.project_id = p.id)
-        <if test="project_name !=null and !''.equals(project_name.trim()) and combo_name !=null and !''.equals(combo_name.trim()) ">
         <where>
+            a.combo_id not IN (0,1)
             <if test="project_name !=null and !''.equals(project_name.trim()) ">
-              project_name=#{project_name}
+              AND p.name like CONCAT('%',#{project_name},'%')
             </if>
             <if test="combo_name !=null and !''.equals(combo_name.trim())">
-              combo_name=#{combo_name}
+              AND combo_name like CONCAT('%',#{combo_name},'%')
             </if>
         </where>
 
-        </if>
     </select>
 
     <update id="editPayCombo">
