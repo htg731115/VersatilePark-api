@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hds.ssm.dao.ParkingRecordDao">
+    <select id="getParkingRecord" resultType="com.hds.ssm.model.ParkingRecord">
+        SELECT
+            a.id,
+            a.plate_number,
+            in_time,
+            out_time,
+            combo_name,
+            c.name as project_name
+        FROM
+            parking_record a
+        LEFT JOIN purchase_record b ON (
+            a.plate_number = b.plate_number
+        )
+        LEFT JOIN pay_combo p ON (b.combo_id = p.combo_id)
+        left join project_info  c on (a.project_id=c.id)
+        <if test="state!=0">
+                <where>
+                <if test="state==1">out_time is null </if>
+                <if test="state==2">out_time is not null</if></where>
+        </if>
+    </select>
+</mapper>
