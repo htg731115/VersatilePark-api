@@ -19,8 +19,8 @@ public class ParkingRecordController {
 
     @ResponseBody
     @RequestMapping(value = "/get-parkingRecord", method = RequestMethod.GET)
-    public PageInfo<ParkingRecord> getParkingRecord(@RequestParam("state") Integer state, @RequestParam("pageNum") Integer pageNum, @RequestParam("start_Date") String startDate, @RequestParam("end_Date") String endDate){
-        PageInfo <ParkingRecord> parkingRecords = parkingRecordService.getParkingRecord(state,pageNum);
+    public PageInfo<ParkingRecord> getParkingRecord(@RequestParam("state") Integer state, @RequestParam("pageNum") Integer pageNum, @RequestParam(value = "start_Date",required = false) String startDate, @RequestParam(value = "end_Date",required = false) String endDate){
+        PageInfo <ParkingRecord> parkingRecords = parkingRecordService.getParkingRecord(state,pageNum,startDate,endDate);
         return parkingRecords;
     }
 }

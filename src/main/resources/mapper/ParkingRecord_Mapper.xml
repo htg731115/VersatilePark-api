@@ -16,10 +16,17 @@
         )
         LEFT JOIN pay_combo p ON (b.combo_id = p.combo_id)
         left join project_info  c on (a.project_id=c.id)
-        <if test="state!=0">
-                <where>
-                <if test="state==1">out_time is null </if>
-                <if test="state==2">out_time is not null</if></where>
-        </if>
+        where del_flag=0
+            <if test="state!=0">
+                <if test="state==1">and out_time is null </if>
+                <if test="state==2">and out_time is not null</if>
+            </if>
+            <if test="start_date!= null">
+                and in_time &gt;=#{start_date}
+            </if>
+            <if test="end_date!=null">
+                and out_time &lt;=#{end_date}
+            </if>
+
     </select>
 </mapper>
