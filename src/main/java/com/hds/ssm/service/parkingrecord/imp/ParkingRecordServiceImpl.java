@@ -34,4 +34,9 @@ public class ParkingRecordServiceImpl implements ParkingRecordService {
             return inPort;
         }
     }
+
+    @Override
+    public void alterPortPlateNum(String plateNum) {
+
+    }
 }

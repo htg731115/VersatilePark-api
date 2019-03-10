@@ -20,4 +20,5 @@ public interface ProjectService {
                     int admin_id);
     Project findProject(String name);
     List<Project> getAllProject();
+    Project findProjectById(int id);
 }

@@ -24,7 +24,12 @@
           project_info p left JOIN manager_info m on(p.admin_id=m.id)
         Where p.name=#{name}
     </select>
-
+    <select id="findProjectById" resultType="com.hds.ssm.model.Project">
+        SELECT
+          id,name
+        FROM project_info
+        where id=#{id}
+    </select>
 
     <insert id="addProject">
         INSERT INTO project_info (`name`, `address`, `opentime`, `area`, `total_num`, `manage_num`, `state`, `admin_id`)

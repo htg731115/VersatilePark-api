@@ -3,7 +3,9 @@ package com.hds.ssm.control;
 import com.github.pagehelper.PageInfo;
 import com.hds.ssm.model.ParkingRecord;
 import com.hds.ssm.model.PortRQ;
+import com.hds.ssm.model.Project;
 import com.hds.ssm.service.parkingrecord.ParkingRecordService;
+import com.hds.ssm.service.project.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,8 @@ import java.util.List;
 public class ParkingRecordController {
     @Autowired
     ParkingRecordService parkingRecordService;
+    @Autowired
+    private ProjectService projectService;
 
     @ResponseBody
     @RequestMapping(value = "/get-parkingRecord", method = RequestMethod.GET)
@@ -35,6 +39,8 @@ public class ParkingRecordController {
         Date readOutTime = portRQ.getRead_out_time();
         Date inTime = portRQ.getOut_time();
         Date outTime = portRQ.getOut_time();
+        Project project = projectService.findProjectById(portRQ.getId());
+        portRQ.setProjectName(project.getName());
         if(outTime == null)
         {
             if(readOutTime == null){
@@ -51,5 +57,10 @@ public class ParkingRecordController {
         }
         portRQ.setProcessFlag(processFlag);
         return portRQ;
+    }
+
+    @RequestMapping(value = "alter-port-record-plateNum",method = RequestMethod.POST)
+    public void alterPortPlateNum(@RequestParam("plateNum")String plateNum){
+        parkingRecordService.
     }
 }
