@@ -6,13 +6,16 @@ import com.hds.ssm.model.PortRQ;
 import com.hds.ssm.model.Project;
 import com.hds.ssm.service.parkingrecord.ParkingRecordService;
 import com.hds.ssm.service.project.ProjectService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.crypto.Data;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RequestMapping("/api")
@@ -39,8 +42,10 @@ public class ParkingRecordController {
         Date readOutTime = portRQ.getRead_out_time();
         Date inTime = portRQ.getOut_time();
         Date outTime = portRQ.getOut_time();
-        Project project = projectService.findProjectById(portRQ.getId());
-        portRQ.setProjectName(project.getName());
+        if(projectId != null) {
+            Project project = projectService.findProjectById(portRQ.getId());
+            portRQ.setProjectName(project.getName());
+        }
         if(outTime == null)
         {
             if(readOutTime == null){
@@ -59,8 +64,27 @@ public class ParkingRecordController {
         return portRQ;
     }
 
-    @RequestMapping(value = "alter-port-record-plateNum",method = RequestMethod.POST)
-    public void alterPortPlateNum(@RequestParam("plateNum")String plateNum){
-        parkingRecordService.
+    @ResponseBody
+    @RequestMapping(value = "/alter-port-record-plateNum",method = RequestMethod.POST)
+    public void alterPortPlateNum(@RequestParam("plateNum")String plateNum, @RequestParam("id") Integer id){
+        parkingRecordService.alterPortPlateNum(plateNum,id);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/get-free-parking", method = RequestMethod.GET)
+    public Map<String, Object> getFreeParking(@RequestParam("projectId") Integer projectId){
+        Map<String, Object> map = new HashMap<>();
+        Integer freeParkingNum = parkingRecordService.getFreeParking(projectId);
+        Project project = projectService.findProjectById(projectId);
+        Double percent = (double)freeParkingNum/project.getManage_num();
+        map.put("freeParkingNum",freeParkingNum);
+        map.put("percent",percent);
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/open-port", method = RequestMethod.POST)
+    public void openPort(@RequestParam("id") Integer id, @RequestParam("managerId") Integer managerId , @RequestParam("reason") String reason){
+        parkingRecordService.openPort(id,managerId,reason);
     }
 }

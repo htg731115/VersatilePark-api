@@ -31,7 +31,7 @@
     </select>
 
     <select id="getPortRecordOut" resultType="com.hds.ssm.model.PortRQ">
-        SELECT plate_number,in_time,out_time,read_in_time,read_out_time
+        SELECT id,project_id,plate_number,in_time,out_time,read_in_time,read_out_time
         FROM parking_record
         <if test="projectId!=null">
             where project_id=#{projectId}
@@ -48,7 +48,22 @@
         ORDER BY read_in_time DESC
         LIMIT 0,1
     </select>
+
+    <select id="getFreeParking" resultType="int">
+        select manage_num-inNum
+        from (
+            select count(id) inNum
+            from parking_record
+            where out_time is NULL
+            and project_id = #{projectId})a ,project_info
+        where id = #{projectId}
+
+
+    </select>
     <update id="alterPortPlateNum">
-        UPDATE P
+        UPDATE parking_record SET plate_number = #{plateNum} WHERE id = #{id}
+    </update>
+    <update id="openPort">
+        UPDATE parking_record
     </update>
 </mapper>

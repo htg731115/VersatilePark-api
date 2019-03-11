@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service(value = "ParkingRecordService")
 public class ParkingRecordServiceImpl implements ParkingRecordService {
@@ -36,7 +37,17 @@ public class ParkingRecordServiceImpl implements ParkingRecordService {
     }
 
     @Override
-    public void alterPortPlateNum(String plateNum) {
+    public void alterPortPlateNum(String plateNum, Integer id) {
+        parkingRecordDao.alterPortPlateNum(plateNum,id);
+    }
 
+    @Override
+    public Integer getFreeParking(Integer projectId) {
+        return parkingRecordDao.getFreeParking(projectId);
+    }
+
+    @Override
+    public void openPort(Integer id, Integer managerId, String reason) {
+        parkingRecordDao.openPort(id,managerId,reason);
     }
 }

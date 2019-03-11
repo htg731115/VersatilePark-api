@@ -26,7 +26,7 @@
     </select>
     <select id="findProjectById" resultType="com.hds.ssm.model.Project">
         SELECT
-          id,name
+          *
         FROM project_info
         where id=#{id}
     </select>
