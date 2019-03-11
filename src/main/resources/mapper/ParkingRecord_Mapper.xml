@@ -29,7 +29,11 @@
             </if>
 
     </select>
-
+    <select id="getParkingRecordById" resultType="com.hds.ssm.model.ParkingRecord">
+        SELECT *
+        FROM parking_record
+        WHERE id = #{id}
+    </select>
     <select id="getPortRecordOut" resultType="com.hds.ssm.model.PortRQ">
         SELECT id,project_id,plate_number,in_time,out_time,read_in_time,read_out_time
         FROM parking_record

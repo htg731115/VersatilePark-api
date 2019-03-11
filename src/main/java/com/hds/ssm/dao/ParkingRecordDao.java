@@ -13,4 +13,5 @@ public interface ParkingRecordDao {
     void alterPortPlateNum(@Param("plateNum") String plateNum, @Param("id") Integer id);
     Integer getFreeParking(@Param("projectId") Integer projectId);
     void openPort(@Param("id") Integer id,@Param("managerId") Integer managerId,String reason);
+    ParkingRecord getParkingRecordById(@Param("id") Integer id);
 }

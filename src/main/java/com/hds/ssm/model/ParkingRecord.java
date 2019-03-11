@@ -58,6 +58,25 @@ public class ParkingRecord {
     private Integer del_flag;
     private Date in_time;
     private Date out_time;
+
+    public Date getRead_in_time() {
+        return read_in_time;
+    }
+
+    public void setRead_in_time(Date read_in_time) {
+        this.read_in_time = read_in_time;
+    }
+
+    public Date getRead_out_time() {
+        return read_out_time;
+    }
+
+    public void setRead_out_time(Date read_out_time) {
+        this.read_out_time = read_out_time;
+    }
+
+    private Date read_in_time;
+    private Date read_out_time;
     private String plate_number;
 
     public String getCombo_name() {

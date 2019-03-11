@@ -12,4 +12,5 @@ public interface ParkingRecordService {
     void alterPortPlateNum(String plateNum,Integer id);
     Integer getFreeParking(Integer projectId);
     void openPort(Integer id,Integer managerId,String reason);
+    ParkingRecord getParkingRecordById(Integer id);
 }

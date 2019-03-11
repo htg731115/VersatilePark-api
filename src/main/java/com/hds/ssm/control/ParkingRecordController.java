@@ -40,7 +40,7 @@ public class ParkingRecordController {
         int processFlag = 0;
         Date readInTime = portRQ.getRead_in_time();
         Date readOutTime = portRQ.getRead_out_time();
-        Date inTime = portRQ.getOut_time();
+        Date inTime = portRQ.getIn_time();
         Date outTime = portRQ.getOut_time();
         if(projectId != null) {
             Project project = projectService.findProjectById(portRQ.getId());
@@ -85,6 +85,13 @@ public class ParkingRecordController {
     @ResponseBody
     @RequestMapping(value = "/open-port", method = RequestMethod.POST)
     public void openPort(@RequestParam("id") Integer id, @RequestParam("managerId") Integer managerId , @RequestParam("reason") String reason){
+        ParkingRecord parkingRecord = parkingRecordService.getParkingRecordById(id);
+        Date readOutTime = parkingRecord.getRead_out_time();
+        Date inTime = parkingRecord.getIn_time();
+        Date outTime = parkingRecord.getOut_time();
+        if(readOutTime ==null){
+            inTime = new Date();
+        }
         parkingRecordService.openPort(id,managerId,reason);
     }
 }

@@ -29,10 +29,15 @@ public class ParkingRecordServiceImpl implements ParkingRecordService {
     public PortRQ getPortRecord(Integer projectId) {
         PortRQ inPort = parkingRecordDao.getPortRecordIn(projectId);//最后入场识别
         PortRQ outPort = parkingRecordDao.getPortRecordOut(projectId);//最后出场识别
-        if(outPort.getRead_out_time().getTime() >inPort.getRead_in_time().getTime()){
-            return outPort;
-        }else{
+        if(null ==outPort.getRead_out_time()){
             return inPort;
+        }
+        else{
+            if(outPort.getRead_out_time().getTime() >inPort.getRead_in_time().getTime()){
+                return outPort;
+            }else{
+                return inPort;
+            }
         }
     }
 
@@ -49,5 +54,10 @@ public class ParkingRecordServiceImpl implements ParkingRecordService {
     @Override
     public void openPort(Integer id, Integer managerId, String reason) {
         parkingRecordDao.openPort(id,managerId,reason);
+    }
+
+    @Override
+    public ParkingRecord getParkingRecordById(Integer id) {
+        return parkingRecordDao.getParkingRecordById(id);
     }
 }
