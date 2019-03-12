@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.crypto.Data;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,8 +89,19 @@ public class ParkingRecordController {
         Date readOutTime = parkingRecord.getRead_out_time();
         Date inTime = parkingRecord.getIn_time();
         Date outTime = parkingRecord.getOut_time();
-        if(readOutTime ==null){
-            inTime = new Date();
+        Date now = new Date();
+        if(inTime == null){
+            inTime = now;
+            readOutTime = now;
+            outTime = now;
+            parkingRecordService.updateParkingRecord(id,inTime,readOutTime,outTime);
+        } else if(readOutTime ==null){
+            readOutTime = now;
+            outTime = now;
+            parkingRecordService.updateParkingRecord(id,null,readOutTime,outTime);
+        } else if(outTime == null){
+            outTime = now;
+            parkingRecordService.updateParkingRecord(id,null,null,outTime);
         }
         parkingRecordService.openPort(id,managerId,reason);
     }

@@ -3,8 +3,8 @@ package com.hds.ssm.service.parkingrecord;
 import com.github.pagehelper.PageInfo;
 import com.hds.ssm.model.ParkingRecord;
 import com.hds.ssm.model.PortRQ;
+import java.util.Date;
 
-import java.util.Map;
 
 public interface ParkingRecordService {
     PageInfo<ParkingRecord> getParkingRecord(Integer state,Integer pageNum,String startDate,String endDate);
@@ -13,4 +13,5 @@ public interface ParkingRecordService {
     Integer getFreeParking(Integer projectId);
     void openPort(Integer id,Integer managerId,String reason);
     ParkingRecord getParkingRecordById(Integer id);
+    void updateParkingRecord(Integer id, Date inTime, Date readOutTime, Date outTime);
 }

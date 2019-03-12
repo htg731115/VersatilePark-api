@@ -9,6 +9,7 @@ import com.hds.ssm.service.parkingrecord.ParkingRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -59,5 +60,10 @@ public class ParkingRecordServiceImpl implements ParkingRecordService {
     @Override
     public ParkingRecord getParkingRecordById(Integer id) {
         return parkingRecordDao.getParkingRecordById(id);
+    }
+
+    @Override
+    public void updateParkingRecord(Integer id, Date inTime, Date readOutTime, Date outTime) {
+        parkingRecordDao.updateParkingRecord(id,inTime,readOutTime,outTime);
     }
 }

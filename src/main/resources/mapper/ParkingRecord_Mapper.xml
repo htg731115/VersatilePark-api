@@ -68,6 +68,19 @@
         UPDATE parking_record SET plate_number = #{plateNum} WHERE id = #{id}
     </update>
     <update id="openPort">
-        UPDATE parking_record
+        INSERT INTO log_open_port (id,manager_id,reason) value (#{id},#{managerId},#{reason})
+    </update>
+    <update id="updateParkingRecord">
+        UPDATE parking_record SET
+        <if test="inTime!=null">
+            in_time = #{inTime},
+        </if>
+        <if test="readOutTime!=null">
+            read_out_time = #{readOutTime},
+        </if>
+        <if test="outTime !=null">
+            out_time = #{outTime}
+        </if>
+        where id =#{id}
     </update>
 </mapper>
