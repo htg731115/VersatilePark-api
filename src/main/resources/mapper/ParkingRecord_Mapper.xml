@@ -52,6 +52,11 @@
         ORDER BY read_in_time DESC
         LIMIT 0,1
     </select>
+    <select id="findOutTimeById" resultType="java.util.Date">
+        SELECT out_time
+        FROM parking_record
+        WHERE id=#{id}
+    </select>
 
     <select id="getFreeParking" resultType="int">
         select manage_num-inNum
@@ -61,8 +66,12 @@
             where out_time is NULL
             and project_id = #{projectId})a ,project_info
         where id = #{projectId}
+    </select>
 
-
+    <select id="getLogOpenRecord" resultType="com.hds.ssm.model.OpenPortRecord">
+        select a.id,manager_id,reason,plate_number,out_time
+        from log_open_port a left join parking_record b on(a.id=b.id)
+        where  b.project_id=#{projectId}
     </select>
     <update id="alterPortPlateNum">
         UPDATE parking_record SET plate_number = #{plateNum} WHERE id = #{id}

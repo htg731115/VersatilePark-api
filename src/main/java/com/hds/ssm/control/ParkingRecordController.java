@@ -1,9 +1,11 @@
 package com.hds.ssm.control;
 
 import com.github.pagehelper.PageInfo;
+import com.hds.ssm.model.OpenPortRecord;
 import com.hds.ssm.model.ParkingRecord;
 import com.hds.ssm.model.PortRQ;
 import com.hds.ssm.model.Project;
+import com.hds.ssm.service.manage.ManagerService;
 import com.hds.ssm.service.parkingrecord.ParkingRecordService;
 import com.hds.ssm.service.project.ProjectService;
 import org.apache.ibatis.annotations.Param;
@@ -25,6 +27,8 @@ public class ParkingRecordController {
     ParkingRecordService parkingRecordService;
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private ManagerService managerService;
 
     @ResponseBody
     @RequestMapping(value = "/get-parkingRecord", method = RequestMethod.GET)
@@ -104,5 +108,22 @@ public class ParkingRecordController {
             parkingRecordService.updateParkingRecord(id,null,null,outTime);
         }
         parkingRecordService.openPort(id,managerId,reason);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/get-log-open-record", method = RequestMethod.GET)
+    public PageInfo<OpenPortRecord> getLogOpenRecord(@RequestParam("projectId") Integer projectId,@RequestParam("pageNum") Integer pageNum){
+        PageInfo<OpenPortRecord>logOpenRecord = parkingRecordService.getLogOpenRecord(projectId, pageNum);
+        String projectName,managerName;
+        Date outTime;
+        for (OpenPortRecord record:logOpenRecord.getList()) {
+            managerName = managerService.FindManage(record.getManager_id()).getName();
+            projectName = projectService.findProjectById(projectId).getName();
+            outTime = parkingRecordService.findOutTimeById(record.getId());
+            record.setManager_name(managerName);
+            record.setProject_name(projectName);
+            record.setOut_time(outTime);
+        }
+        return logOpenRecord;
     }
 }

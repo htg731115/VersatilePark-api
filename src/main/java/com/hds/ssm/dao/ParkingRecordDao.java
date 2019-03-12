@@ -1,5 +1,6 @@
 package com.hds.ssm.dao;
 
+import com.hds.ssm.model.OpenPortRecord;
 import com.hds.ssm.model.ParkingRecord;
 import com.hds.ssm.model.PortRQ;
 import org.apache.ibatis.annotations.Param;
@@ -16,4 +17,6 @@ public interface ParkingRecordDao {
     void openPort(@Param("id") Integer id,@Param("managerId") Integer managerId,@Param("reason") String reason);
     ParkingRecord getParkingRecordById(@Param("id") Integer id);
     void updateParkingRecord(@Param("id")Integer id, @Param("inTime")Date inTime,@Param("readOutTime") Date readOutTime, @Param("outTime") Date outTime);
+    List<OpenPortRecord> getLogOpenRecord(@Param("projectId") Integer projectId);
+    Date findOutTimeById(@Param("id")Integer id);
 }

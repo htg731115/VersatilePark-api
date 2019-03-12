@@ -3,6 +3,7 @@ package com.hds.ssm.service.parkingrecord.imp;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hds.ssm.dao.ParkingRecordDao;
+import com.hds.ssm.model.OpenPortRecord;
 import com.hds.ssm.model.ParkingRecord;
 import com.hds.ssm.model.PortRQ;
 import com.hds.ssm.service.parkingrecord.ParkingRecordService;
@@ -66,4 +67,19 @@ public class ParkingRecordServiceImpl implements ParkingRecordService {
     public void updateParkingRecord(Integer id, Date inTime, Date readOutTime, Date outTime) {
         parkingRecordDao.updateParkingRecord(id,inTime,readOutTime,outTime);
     }
+
+    @Override
+    public PageInfo<OpenPortRecord> getLogOpenRecord(Integer projectId,Integer pageNum) {
+        PageHelper.startPage(pageNum,10);
+        List<OpenPortRecord> openPortRecords = parkingRecordDao.getLogOpenRecord(projectId);
+
+        PageInfo<OpenPortRecord> openPortRecordPageInfo = new PageInfo<>(openPortRecords);
+        return openPortRecordPageInfo;
+    }
+
+    @Override
+    public Date findOutTimeById(Integer id) {
+        return parkingRecordDao.findOutTimeById(id);
+    }
+
 }
