@@ -3,6 +3,7 @@ package com.hds.ssm.dao;
 import com.hds.ssm.model.OpenPortRecord;
 import com.hds.ssm.model.ParkingRecord;
 import com.hds.ssm.model.PortRQ;
+import com.hds.ssm.model.carFlowRP;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -19,4 +20,6 @@ public interface ParkingRecordDao {
     void updateParkingRecord(@Param("id")Integer id, @Param("inTime")Date inTime,@Param("readOutTime") Date readOutTime, @Param("outTime") Date outTime);
     List<OpenPortRecord> getLogOpenRecord(@Param("projectId") Integer projectId);
     Date findOutTimeById(@Param("id")Integer id);
+    List<carFlowRP> getCarFlow();
+
 }

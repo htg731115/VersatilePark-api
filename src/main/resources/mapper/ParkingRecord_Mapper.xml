@@ -73,6 +73,13 @@
         from log_open_port a left join parking_record b on(a.id=b.id)
         where  b.project_id=#{projectId}
     </select>
+
+    <select id="getCarFlow" resultType="com.hds.ssm.model.carFlowRP">
+        select count(*) as carNum,DATE_FORMAT(in_time,'%Y%m') as  time from parking_record
+        where in_time>DATE_SUB(CURDATE(), INTERVAL 5 MONTH)
+        group by  DATE_FORMAT(in_time,'%Y%m')
+    </select>
+
     <update id="alterPortPlateNum">
         UPDATE parking_record SET plate_number = #{plateNum} WHERE id = #{id}
     </update>

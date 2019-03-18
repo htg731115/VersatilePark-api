@@ -1,10 +1,7 @@
 package com.hds.ssm.control;
 
 import com.github.pagehelper.PageInfo;
-import com.hds.ssm.model.OpenPortRecord;
-import com.hds.ssm.model.ParkingRecord;
-import com.hds.ssm.model.PortRQ;
-import com.hds.ssm.model.Project;
+import com.hds.ssm.model.*;
 import com.hds.ssm.service.manage.ManagerService;
 import com.hds.ssm.service.parkingrecord.ParkingRecordService;
 import com.hds.ssm.service.project.ProjectService;
@@ -14,10 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.crypto.Data;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @CrossOrigin
 @RequestMapping("/api")
@@ -126,4 +120,55 @@ public class ParkingRecordController {
         }
         return logOpenRecord;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/get-carFlow",method = RequestMethod.GET)
+    public List<carFlowRP> getCarFlow(){
+        Calendar cal =  Calendar.getInstance();
+        int month = cal.get(Calendar.MONTH)+1;
+        int year = cal.get(Calendar.YEAR);
+        int tempYear = cal.get(Calendar.YEAR)-1;
+        boolean flag = false;
+        int temp[] =new int[6];
+        String[] str= new String[6];
+        Map<String,Integer> map = new TreeMap<>(new Comparator<String>() {
+            public int compare(String obj1, String obj2) {
+                // 降序排序
+                return obj2.compareTo(obj1);
+            }
+        });;
+        for (int i=0;i<6;i++){
+            temp[i] = month-i;
+            if (temp[i]<=0 ){
+                temp[i] = 12+temp[i];
+                flag = true;
+            }
+            if(flag){
+                year = tempYear;
+            }
+            if(temp[i]<10){
+                str[i] = String.valueOf(year) +'0'+temp[i]+"";
+            }else{
+                str[i] = String.valueOf(year) +temp[i]+"";
+            }
+            map.put(str[i],0);
+        }
+        List<carFlowRP> list;
+        list = parkingRecordService.getCarFlow();
+        for (carFlowRP carFlowRP1:list) {
+            map.put(carFlowRP1.getTime(),carFlowRP1.getCarNum());
+        }
+
+        list.clear();
+
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            carFlowRP carFlowRP2 = new carFlowRP();
+            carFlowRP2.setCarNum(entry.getValue());
+            carFlowRP2.setTime(entry.getKey());
+            list.add(carFlowRP2);
+        }
+        return list;
+
+    }
+
 }

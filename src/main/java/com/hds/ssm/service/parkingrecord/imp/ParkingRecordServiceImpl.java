@@ -6,6 +6,7 @@ import com.hds.ssm.dao.ParkingRecordDao;
 import com.hds.ssm.model.OpenPortRecord;
 import com.hds.ssm.model.ParkingRecord;
 import com.hds.ssm.model.PortRQ;
+import com.hds.ssm.model.carFlowRP;
 import com.hds.ssm.service.parkingrecord.ParkingRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,6 +81,11 @@ public class ParkingRecordServiceImpl implements ParkingRecordService {
     @Override
     public Date findOutTimeById(Integer id) {
         return parkingRecordDao.findOutTimeById(id);
+    }
+
+    @Override
+    public List<carFlowRP> getCarFlow() {
+        return parkingRecordDao.getCarFlow();
     }
 
 }
