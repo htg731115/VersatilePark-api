@@ -13,9 +13,17 @@
         SELECT*
         FROM
           user
-        WHERE #{name}=name
+        WHERE name = #{name}
     </select>
     <select id="addUser" resultType="com.hds.ssm.model.User">
         insert into user(id,name,password) values(#{id},#{name},#{password})
     </select>
+
+    <select id="getUserTypeById" resultType="com.hds.ssm.model.UserRole">
+      SELECT `user`.id as id,user_type,`name`
+      FROM user_role ,`user`
+      where user_role.id = `user`.id
+      AND user_role.id=#{id}
+    </select>
+
 </mapper>

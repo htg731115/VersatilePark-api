@@ -3,6 +3,7 @@ package com.hds.ssm.service.user.imp;
 
 import com.hds.ssm.dao.UserDao;
 import com.hds.ssm.model.User;
+import com.hds.ssm.model.UserRole;
 import com.hds.ssm.service.user.UserService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,12 @@ public class UserServiceImpl implements UserService {
     public void addUser(String id,String name,String password) {
          userDao.addUser(id,name,password);
     }
+
+    @Override
+    public UserRole getUserTypeById(Integer id) {
+        return userDao.getUserTypeById(id);
+    }
+
     public List<User> selectUsers(){
         return userDao.selectUsers();
     }

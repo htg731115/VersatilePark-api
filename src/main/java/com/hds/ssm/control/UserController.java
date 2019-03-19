@@ -2,6 +2,7 @@ package com.hds.ssm.control;
 
 
 import com.hds.ssm.model.User;
+import com.hds.ssm.model.UserRole;
 import com.hds.ssm.service.user.UserService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +21,18 @@ public class UserController {
 
     @ResponseBody
     @PostMapping("/login")
-    public boolean Login(@RequestBody User user)
+    public UserRole Login(@RequestBody User user)
     {
         User temp=UserService.findUser(user.getName());
         if(null!=temp)
         {
             if(temp.getPassword().equals(user.getPassword()))
             {
-                return true;
+                UserRole userRole = UserService.getUserTypeById(temp.getId());
+                return userRole;
             }
         }
-        return false;
+        return null;
     }
     @ResponseBody
     @PostMapping("/addUser")
