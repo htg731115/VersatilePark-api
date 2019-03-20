@@ -17,4 +17,12 @@
     <delete id="DelManager" >
         DELETE FROM manager_info WHERE id=#{id}
     </delete>
+    <update id="editManagerInfo">
+        update manager_info set
+        <if test="name!=null">name = #{name},</if>
+        <if test="idNum!=null">Id_Num = #{idNum},</if>
+        <if test="phoneNum!=null">Phone_Num=#{phoneNum}</if>
+        where id = #{id};
+        <if test="name!=null">update user set user_name = #{name} where id =#{id}</if>
+    </update>
 </mapper>

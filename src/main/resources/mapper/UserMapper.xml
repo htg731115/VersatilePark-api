@@ -20,7 +20,7 @@
     </select>
 
     <select id="getUserTypeById" resultType="com.hds.ssm.model.UserRole">
-      SELECT `user`.id as id,user_type,`name`
+      SELECT `user`.id as id,user_type,`user_name` as name
       FROM user_role ,`user`
       where user_role.id = `user`.id
       AND user_role.id=#{id}

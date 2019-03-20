@@ -36,4 +36,9 @@ public class ManagerServiceImpl implements ManagerService {
     public void DelManager(Integer id) {
          managerDao.DelManager(id);
     }
+
+    @Override
+    public void editManagerInfo(Integer id, String name, String idNum, String phoneNum) {
+        managerDao.editManagerInfo(id,name,idNum,phoneNum);
+    }
 }

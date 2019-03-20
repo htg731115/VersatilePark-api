@@ -12,4 +12,5 @@ public interface ManagerDao {
     Manager FindManager(@Param("id")int id);
     void DelManager(@Param("id")Integer id);
     Manager GetDetails(@Param("id") Integer id);
+    void editManagerInfo(@Param("id") Integer id,@Param("name")String name, @Param("idNum")String idNum, @Param("phoneNum") String phoneNum);
 }
