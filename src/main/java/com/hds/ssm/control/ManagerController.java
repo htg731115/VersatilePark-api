@@ -58,4 +58,6 @@ public class ManagerController {
         managerService.DelManager(id);
         return true;
     }
+
+
 }

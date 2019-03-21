@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
-@CrossOrigin
+
 @Controller
 @RequestMapping("/api")
 public class UserController {
@@ -49,5 +49,15 @@ public class UserController {
         System.out.println(student.getName());
         return UserService.selectUsers().get(0).getName();
     }
+    @ResponseBody
+    @RequestMapping(value = "/update-manager-password",method = RequestMethod.POST)
+    public boolean changePassWord(@RequestParam("id")String id,@RequestParam("oldPassWord")String oldPassWord,@RequestParam("passWord")String passWord){
+        User user = UserService.findUserById(Integer.parseInt(id));
+        if (user.getPassword().equals(oldPassWord)){
+            UserService.changePassWord(Integer.parseInt(id),passWord);
+            return true;
+        }
+        return false;
     }
+}
 

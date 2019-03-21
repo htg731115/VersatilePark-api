@@ -11,6 +11,8 @@ public interface UserService {
 
     List<User> selectUsers();
     User findUser(String name);
+    User findUserById(Integer id);
     void addUser(String id,String name,String password);
     UserRole getUserTypeById(Integer id);
+    void changePassWord(Integer id, String password);
 }

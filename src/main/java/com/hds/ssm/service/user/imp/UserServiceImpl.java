@@ -26,6 +26,11 @@ public class UserServiceImpl implements UserService {
         return userDao.getUserTypeById(id);
     }
 
+    @Override
+    public void changePassWord(Integer id, String password) {
+        userDao.changePassWord(id,password);
+    }
+
     public List<User> selectUsers(){
         return userDao.selectUsers();
     }
@@ -33,6 +38,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUser(String name) {
         return userDao.findUser(name);
+    }
+
+    @Override
+    public User findUserById(Integer id) {
+        return userDao.findUserById(id);
     }
 }
 

@@ -15,6 +15,13 @@
           user
         WHERE name = #{name}
     </select>
+    <select id="findUserById" resultType="com.hds.ssm.model.User">
+        SELECT*
+        FROM
+          user
+        WHERE id = #{id}
+    </select>
+
     <select id="addUser" resultType="com.hds.ssm.model.User">
         insert into user(id,name,password) values(#{id},#{name},#{password})
     </select>
@@ -25,5 +32,7 @@
       where user_role.id = `user`.id
       AND user_role.id=#{id}
     </select>
-
+    <update id="changePassWord">
+        update user set password = #{password} where id=#{id}
+    </update>
 </mapper>
