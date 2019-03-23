@@ -22,4 +22,5 @@ public interface ProjectDao {
     Project findProject(@Param("name") String name);
     Project findProjectById(@Param("id") Integer id);
     List<Project> getAllProject();
+    Project findProjectByAdminId(@Param("adminId")int adminId);
 }

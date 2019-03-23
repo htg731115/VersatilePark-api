@@ -63,4 +63,10 @@ public class ProjectController {
         String project=map.get("project").toString();
         projectService.alterPorject(admin_id,project);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/manager-getProject",method = RequestMethod.GET)
+    public Project managerGetProject(@RequestParam("adminId")Integer adminId){
+        return projectService.findProjectByAdminId(adminId);
+    }
 }

@@ -30,6 +30,11 @@
         FROM project_info
         where id=#{id}
     </select>
+    <select id="findProjectByAdminId" resultType="com.hds.ssm.model.Project">
+        SELECT *
+        FROM project_info
+        where admin_id=#{adminId}
+    </select>
 
     <insert id="addProject">
         INSERT INTO project_info (`name`, `address`, `opentime`, `area`, `total_num`, `manage_num`, `state`, `admin_id`)

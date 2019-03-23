@@ -55,4 +55,10 @@ public class ProjectServiceImpl implements ProjectService{
         return projectDao.findProjectById(id);
     }
 
+    @Override
+    public Project findProjectByAdminId(int adminId) {
+         return projectDao.findProjectByAdminId(adminId);
+
+    }
+
 }
