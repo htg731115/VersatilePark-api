@@ -88,4 +88,10 @@ public class ParkingRecordServiceImpl implements ParkingRecordService {
         return parkingRecordDao.getCarFlow();
     }
 
+
+    @Override
+    public PageInfo<ParkingRecord> getParkingRecordByProjectId(Integer pageNum, Integer projectId) {
+        return null;
+    }
+
 }

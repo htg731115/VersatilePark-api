@@ -20,6 +20,15 @@ public class UserRole {
     Integer id;
     Integer user_Type;
 
+    public Integer getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
+    }
+
+    Integer projectId;
     public String getName() {
         return name;
     }

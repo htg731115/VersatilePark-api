@@ -22,4 +22,5 @@ public interface ProjectService {
     List<Project> getAllProject();
     Project findProjectById(int id);
     Project findProjectByAdminId(int adminId);
+    void editProject(Integer projectId, String name, String address, Integer area,Integer manageNum);
 }

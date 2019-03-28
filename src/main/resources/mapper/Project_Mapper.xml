@@ -46,4 +46,14 @@
     <update id="alterProject">
         UPDATE project_info SET admin_id=#{admin_id} where id=#{project}
     </update>
+    <update id="editProject">
+        UPDATE `project_info`
+        SET
+         `name` = #{name},
+         `address` = #{address},
+         `area` = #{area},
+         `manage_num` = #{manageNum}
+        WHERE
+            (`id` = #{projectId});
+    </update>
 </mapper>

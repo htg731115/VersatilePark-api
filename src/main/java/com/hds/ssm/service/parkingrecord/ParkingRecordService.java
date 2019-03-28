@@ -21,4 +21,5 @@ public interface ParkingRecordService {
     PageInfo<OpenPortRecord> getLogOpenRecord(Integer projectId,Integer pageNum);
     Date findOutTimeById(Integer id);
     List<carFlowRP> getCarFlow();
+    PageInfo<ParkingRecord> getParkingRecordByProjectId(Integer pageNum,Integer projectId);
 }

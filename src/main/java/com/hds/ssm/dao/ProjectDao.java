@@ -23,4 +23,5 @@ public interface ProjectDao {
     Project findProjectById(@Param("id") Integer id);
     List<Project> getAllProject();
     Project findProjectByAdminId(@Param("adminId")int adminId);
+    void editProject(@Param("projectId") Integer projectId,@Param("name") String name,@Param("address") String address,@Param("area") Integer area,@Param("manageNum") Integer manageNum);
 }

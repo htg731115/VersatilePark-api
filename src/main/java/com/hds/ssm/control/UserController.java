@@ -3,6 +3,7 @@ package com.hds.ssm.control;
 
 import com.hds.ssm.model.User;
 import com.hds.ssm.model.UserRole;
+import com.hds.ssm.service.project.ProjectService;
 import com.hds.ssm.service.user.UserService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class UserController {
 
     @Autowired
     private UserService UserService;
+    @Autowired
+    private ProjectService projectService;
 
     @ResponseBody
     @PostMapping("/login")
@@ -29,7 +32,12 @@ public class UserController {
             if(temp.getPassword().equals(user.getPassword()))
             {
                 UserRole userRole = UserService.getUserTypeById(temp.getId());
-                return userRole;
+                if(userRole.getUser_Type()==1)//该用户为项目管理员
+                {
+                    Integer projectId =  projectService.findProjectByAdminId(userRole.getId()).getId();
+                    userRole.setProjectId(projectId);
+                }
+                     return userRole;
             }
         }
         return null;

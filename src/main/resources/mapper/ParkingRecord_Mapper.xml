@@ -34,6 +34,12 @@
         FROM parking_record
         WHERE id = #{id}
     </select>
+    <select id="getParkingRecordByProjectId" resultType="com.hds.ssm.model.ParkingRecord">
+        SELECT *
+        FROM parking_record
+        WHERE project_id =#{projectId}
+        AND del_flag =0
+    </select>
     <select id="getPortRecordOut" resultType="com.hds.ssm.model.PortRQ">
         SELECT id,project_id,plate_number,in_time,out_time,read_in_time,read_out_time
         FROM parking_record

@@ -32,6 +32,15 @@ public class ParkingRecordController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/manager-get-parkingRecord", method = RequestMethod.GET)
+    public PageInfo<ParkingRecord> managerGetParkingRecord(@RequestParam("adminId")Integer adminId,@RequestParam("pageNum") Integer pageNum){
+        Project project = projectService.findProjectByAdminId(adminId);
+        Integer projectId = project.getId();
+        PageInfo<ParkingRecord> parkingRecord = parkingRecordService.getParkingRecordByProjectId(pageNum,projectId);
+        return parkingRecord;
+    }
+
+    @ResponseBody
     @RequestMapping(value="/get-port-record",method = RequestMethod.GET)
     public PortRQ getPortRecord(@RequestParam(value = "projectId", required = false) Integer projectId){
         PortRQ portRQ = parkingRecordService.getPortRecord(projectId);

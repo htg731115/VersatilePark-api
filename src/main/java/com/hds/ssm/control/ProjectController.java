@@ -69,4 +69,11 @@ public class ProjectController {
     public Project managerGetProject(@RequestParam("adminId")Integer adminId){
         return projectService.findProjectByAdminId(adminId);
     }
+    @ResponseBody
+    @RequestMapping(value = "/editProject",method = RequestMethod.POST)//修改停車項目
+    public void editProject(@RequestParam("projectId") Integer projectId,@RequestParam("name") String name, @RequestParam("address") String address,
+                            @RequestParam("area") Integer area,@RequestParam("manageNum") Integer manageNum){
+        projectService.editProject(projectId,name,address,area,manageNum);
+    }
+
 }
