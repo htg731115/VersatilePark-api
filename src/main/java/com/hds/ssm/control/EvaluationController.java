@@ -58,4 +58,12 @@ public class EvaluationController {
         return evaluationService.searchListByName(pageNum,customer_name,project_id);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/get-some-content",method = RequestMethod.GET)
+    public String[] getSomeContent(@RequestParam("projectId") Integer projectId){
+        Map<String,String> map ;
+        String [] str = evaluationService.getSomeContent(projectId);
+        return str;
+    }
+
 }

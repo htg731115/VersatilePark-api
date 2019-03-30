@@ -42,5 +42,13 @@
     <select id="getAll" resultType="com.hds.ssm.model.Evaluation" >
         SELECT * FROM evaluation
     </select>
-
+    <select id="getSomeContent" resultType="java.lang.String">
+        SELECT content
+        FROM evaluation
+        <if test="projectId!=null">
+            where project_id = #{projectId}
+        </if>
+        order by create_time desc
+        limit 10
+    </select>
 </mapper>

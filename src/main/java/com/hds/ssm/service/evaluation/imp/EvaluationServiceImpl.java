@@ -87,5 +87,10 @@ public class EvaluationServiceImpl implements EvaluationService {
         return pageInfo;
     }
 
+    @Override
+    public String[] getSomeContent(Integer projectId) {
+        return evaluationDao.getSomeContent(projectId);
+    }
+
 
 }
