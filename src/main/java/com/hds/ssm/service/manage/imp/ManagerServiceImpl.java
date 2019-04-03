@@ -41,4 +41,9 @@ public class ManagerServiceImpl implements ManagerService {
     public void editManagerInfo(Integer id, String name, String idNum, String phoneNum) {
         managerDao.editManagerInfo(id,name,idNum,phoneNum);
     }
+
+    @Override
+    public void updateManagerImg(String imgSrc, String managerId) {
+        managerDao.updateManagerImg(imgSrc,managerId);
+    }
 }

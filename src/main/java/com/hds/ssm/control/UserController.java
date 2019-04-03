@@ -24,7 +24,7 @@ public class UserController {
 
     @ResponseBody
     @PostMapping("/login")
-    public UserRole Login(@RequestBody User user)
+    public UserRole Login(@RequestBody User user,HttpSession session)
     {
         User temp=UserService.findUser(user.getName());
         if(null!=temp)
@@ -36,6 +36,8 @@ public class UserController {
                 {
                     Integer projectId =  projectService.findProjectByAdminId(userRole.getId()).getId();
                     userRole.setProjectId(projectId);
+                    session.setAttribute("userId",temp.getId());
+                    session.setAttribute("projectId",projectId);
                 }
                      return userRole;
             }

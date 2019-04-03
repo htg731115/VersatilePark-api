@@ -3,10 +3,7 @@ package com.hds.ssm.service.parkingrecord.imp;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hds.ssm.dao.ParkingRecordDao;
-import com.hds.ssm.model.OpenPortRecord;
-import com.hds.ssm.model.ParkingRecord;
-import com.hds.ssm.model.PortRQ;
-import com.hds.ssm.model.carFlowRP;
+import com.hds.ssm.model.*;
 import com.hds.ssm.service.parkingrecord.ParkingRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -91,7 +88,35 @@ public class ParkingRecordServiceImpl implements ParkingRecordService {
 
     @Override
     public PageInfo<ParkingRecord> getParkingRecordByProjectId(Integer pageNum, Integer projectId) {
-        return null;
+        PageHelper.startPage(pageNum,10);
+        List<ParkingRecord> parkingRecordLits =  parkingRecordDao.getParkingRecordByProjectId(projectId,null,null,null);
+        PageInfo<ParkingRecord> pageInfo = new PageInfo<>(parkingRecordLits);
+        return pageInfo;
+    }
+
+    @Override
+    public PageInfo<ParkingRecord> searchParkingRecord(Integer pageNum, Integer projectId,String plateNumber,String inTime, String endDate) {
+        if(pageNum ==null)
+            pageNum=1;
+        PageHelper.startPage(pageNum,10);
+        List<ParkingRecord> parkingRecordList = parkingRecordDao.getParkingRecordByProjectId(projectId,plateNumber,inTime,endDate);
+        PageInfo<ParkingRecord> pageInfo = new PageInfo<>(parkingRecordList);
+        return pageInfo;
+    }
+
+    @Override
+    public List<ParkingRecordExcel> getParkingRecordExcelByProjectId(Integer projectId, String startData, String endDate) {
+        return parkingRecordDao.excelGtParkingRecordByProjectId(projectId,startData,endDate);
+    }
+
+    @Override
+    public void deleteParkingRecord(Integer parkingRecordId) {
+        parkingRecordDao.deleteParkingRecord(parkingRecordId);
+    }
+
+    @Override
+    public void insertParkingRecord(Integer projectId,String plateNumber, Date inTime) {
+        parkingRecordDao.insertParkingRecord(projectId,plateNumber,inTime);
     }
 
 }

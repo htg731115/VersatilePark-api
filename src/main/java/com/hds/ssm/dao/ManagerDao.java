@@ -13,4 +13,6 @@ public interface ManagerDao {
     void DelManager(@Param("id")Integer id);
     Manager GetDetails(@Param("id") Integer id);
     void editManagerInfo(@Param("id") Integer id,@Param("name")String name, @Param("idNum")String idNum, @Param("phoneNum") String phoneNum);
+
+    void updateManagerImg(@Param("imgSrc") String imgSrc,@Param("id") String managerId);
 }

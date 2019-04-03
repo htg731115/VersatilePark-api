@@ -1,9 +1,6 @@
 package com.hds.ssm.dao;
 
-import com.hds.ssm.model.OpenPortRecord;
-import com.hds.ssm.model.ParkingRecord;
-import com.hds.ssm.model.PortRQ;
-import com.hds.ssm.model.carFlowRP;
+import com.hds.ssm.model.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -22,4 +19,10 @@ public interface ParkingRecordDao {
     Date findOutTimeById(@Param("id")Integer id);
     List<carFlowRP> getCarFlow();
 
+    List<ParkingRecord> getParkingRecordByProjectId(@Param("projectId") Integer projectId , @Param("plateNumber") String plateNumber, @Param("startDate") String startDate, @Param("endDate") String endDate);
+    List<ParkingRecordExcel> excelGtParkingRecordByProjectId(@Param("projectId") Integer projectId , @Param("startDate") String startDate, @Param("endDate") String endDate);
+
+    void deleteParkingRecord(@Param("parkingRecordId")Integer parkingRecordId);
+
+    void insertParkingRecord(@Param("projectId") Integer projectId,@Param("plateNumber")String plateNumber,@Param("inTime") Date inTime);
 }

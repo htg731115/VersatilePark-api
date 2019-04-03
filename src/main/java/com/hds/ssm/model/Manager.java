@@ -72,4 +72,14 @@ public class Manager {
     private String Phone_Num;
     private int sex;
 
+    public String getImgSrc() {
+        return imgSrc;
+    }
+
+    public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc;
+    }
+
+    private String imgSrc;
+
 }

@@ -5,12 +5,19 @@ import com.hds.ssm.model.*;
 import com.hds.ssm.service.manage.ManagerService;
 import com.hds.ssm.service.parkingrecord.ParkingRecordService;
 import com.hds.ssm.service.project.ProjectService;
+import com.hds.ssm.util.DateUtils;
+import com.hds.ssm.util.ExcelUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.xml.crypto.Data;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @CrossOrigin
@@ -40,6 +47,12 @@ public class ParkingRecordController {
         return parkingRecord;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/search-parking-record")
+    public PageInfo<ParkingRecord> searchParkingRecord(@RequestParam("pageNum") Integer pageNum,@RequestParam(value = "plateNumber",required = false) String plateNumber, @RequestParam(value = "startDate",required = false)String startDate, @RequestParam(value = "endDate",required = false) String endDate, HttpSession session){
+      Integer projectId = Integer.parseInt(session.getAttribute("projectId").toString());
+      return parkingRecordService.searchParkingRecord(pageNum,projectId,plateNumber,startDate,endDate);
+    }
     @ResponseBody
     @RequestMapping(value="/get-port-record",method = RequestMethod.GET)
     public PortRQ getPortRecord(@RequestParam(value = "projectId", required = false) Integer projectId){
@@ -180,4 +193,30 @@ public class ParkingRecordController {
 
     }
 
+//    管理员添加停车记录
+    @ResponseBody
+    @RequestMapping(value = "manager-add-parking-record",method = RequestMethod.POST)
+    public void managerAddParkingRecord(@RequestParam("plateNumber") String plateNumber,@RequestParam("inTime") String inTime,HttpSession session) throws ParseException {
+       // Integer projectId = Integer.parseInt(session.getAttribute("projectId").toString());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date date=sdf.parse(inTime.replace("T"," "));
+        parkingRecordService.insertParkingRecord(1,plateNumber,date);
+    }
+    /*
+        删除停车记录
+     */
+    @ResponseBody
+    @RequestMapping("/delete-parkingRecord")
+    public void deleteParkingRecord (@RequestParam("parkingRecordId") Integer parkingRecordId){
+        parkingRecordService.deleteParkingRecord(parkingRecordId);
+    }
+
+    @RequestMapping("/export")
+    public void export(@RequestParam("projectId") Integer projectId,@RequestParam(value = "startDate",required = false)
+        String startData ,@RequestParam(value = "endDate",required = false) String endDate,HttpServletResponse response){
+        List<ParkingRecordExcel> parkingRecordList = parkingRecordService.getParkingRecordExcelByProjectId(projectId,startData,endDate);
+        //导出操作
+        ExcelUtils.exportExcel(parkingRecordList,null,"停车记录",ParkingRecordExcel.class,"停车记录.xls",response);
+    }
+    
 }

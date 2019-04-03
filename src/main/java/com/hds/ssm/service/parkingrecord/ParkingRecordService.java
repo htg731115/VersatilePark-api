@@ -1,10 +1,7 @@
 package com.hds.ssm.service.parkingrecord;
 
 import com.github.pagehelper.PageInfo;
-import com.hds.ssm.model.OpenPortRecord;
-import com.hds.ssm.model.ParkingRecord;
-import com.hds.ssm.model.PortRQ;
-import com.hds.ssm.model.carFlowRP;
+import com.hds.ssm.model.*;
 
 import java.util.Date;
 import java.util.List;
@@ -22,4 +19,11 @@ public interface ParkingRecordService {
     Date findOutTimeById(Integer id);
     List<carFlowRP> getCarFlow();
     PageInfo<ParkingRecord> getParkingRecordByProjectId(Integer pageNum,Integer projectId);
+    PageInfo<ParkingRecord> searchParkingRecord(Integer pageNum,Integer projectId,String plateNumber,String inTime, String endDate);
+
+    List<ParkingRecordExcel> getParkingRecordExcelByProjectId(Integer projectId, String startData,String endDate);
+
+    void deleteParkingRecord(Integer parkingRecordId);
+
+    void insertParkingRecord(Integer projectId,String plateNumber, Date inTime);
 }

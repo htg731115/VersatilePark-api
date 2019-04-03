@@ -10,7 +10,7 @@
         from manager_info m left join project_info p on(m.id=p.admin_id)
     </select>
     <select id="FindManager" resultType="com.hds.ssm.model.Manager">
-       select m.id,m.name,Sex,id_Num,In_time,Phone_Num,p.name 'project'
+       select m.id,m.name,Sex,id_Num,In_time,Phone_Num,p.name 'project',img_src 'imgSrc'
         from manager_info m left join project_info p on(m.id=p.admin_id)
         where m.id=#{id}
     </select>
@@ -24,5 +24,9 @@
         <if test="phoneNum!=null">Phone_Num=#{phoneNum}</if>
         where id = #{id};
         <if test="name!=null">update user set user_name = #{name} where id =#{id}</if>
+    </update>
+
+    <update id="updateManagerImg">
+        update manager_info set img_src =#{imgSrc} where id =#{id}
     </update>
 </mapper>

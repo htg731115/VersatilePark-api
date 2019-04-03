@@ -25,7 +25,7 @@
                 and in_time &gt;=#{start_date}
             </if>
             <if test="end_date!=null">
-                and out_time &lt;=#{end_date}
+                and in_time &lt;=#{end_date}
             </if>
 
     </select>
@@ -38,8 +38,36 @@
         SELECT *
         FROM parking_record
         WHERE project_id =#{projectId}
+        <if test="plateNumber!=null">
+            and plate_number like '%${plateNumber}%'
+        </if>
+        <if test="startDate!=null">
+            and in_time &gt;=#{startDate}
+        </if>
+        <if test="endDate!=null">
+            and in_time &lt;#{endDate}
+        </if>
         AND del_flag =0
     </select>
+    <select id="excelGtParkingRecordByProjectId" resultType="com.hds.ssm.model.ParkingRecordExcel">
+        SELECT *
+        FROM parking_record
+        <where >
+            <if test="projectId!=null">
+                project_id =#{projectId}</if>
+            <if test="startDate!=null">
+                and in_time &gt;=#{startDate}
+            </if>
+            <if test="endDate!=null">
+                and in_time &lt;=#{endDate}
+            </if>
+            AND del_flag =0
+        </where>
+
+    </select>
+
+
+
     <select id="getPortRecordOut" resultType="com.hds.ssm.model.PortRQ">
         SELECT id,project_id,plate_number,in_time,out_time,read_in_time,read_out_time
         FROM parking_record
@@ -105,4 +133,12 @@
         </if>
         where id =#{id}
     </update>
+
+    <update id="deleteParkingRecord">
+      UPDATE parking_record SET del_flag = 1 where id = #{parkingRecordId}
+    </update>
+
+    <insert id="insertParkingRecord">
+        INSERT  INTO parking_record (project_id,plate_number,in_time,del_flag) values(#{projectId},#{plateNumber},#{inTime},0)
+    </insert>
 </mapper>
