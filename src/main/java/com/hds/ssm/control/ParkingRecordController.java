@@ -200,7 +200,7 @@ public class ParkingRecordController {
        // Integer projectId = Integer.parseInt(session.getAttribute("projectId").toString());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date date=sdf.parse(inTime.replace("T"," "));
-        parkingRecordService.insertParkingRecord(1,plateNumber,date);
+        parkingRecordService.insertParkingRecord(1, plateNumber,date);
     }
     /*
         删除停车记录

@@ -1,5 +1,6 @@
 package com.hds.ssm;
 
+import com.baidu.aip.ocr.AipOcr;
 import com.github.pagehelper.PageHelper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -24,6 +25,8 @@ public class SsmApplication {
         pageHelper.setProperties(properties);
         return pageHelper;
     }
+
+
     public static void main(String[] args) {
         SpringApplication.run(SsmApplication.class, args);
     }
