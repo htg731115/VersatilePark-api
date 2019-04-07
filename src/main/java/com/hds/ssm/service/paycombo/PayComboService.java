@@ -18,4 +18,6 @@ public interface PayComboService {
     PayCombo getPayComboById(Integer combo_id);
     void editPayCombo(Integer combo_id,String combo_name, Integer effective_length, Double money, Date start_time, Date end_time);
     PageInfo<PayComboListRQ> searchComboByName(String combo_name, String project_name,Integer pageNum, Integer pageSize);
+
+    PageInfo<PayCombo> getPayComboByProjectId(Integer projectId,Integer pageNum);
 }

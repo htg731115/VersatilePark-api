@@ -15,4 +15,6 @@ public interface PayComboDao {
     List<PayComboListRQ> getPaycomboList();
     void deletePayCombo(@Param("combo_id") Integer combo_id);
     List<PayComboListRQ> searchComboByName(@Param("combo_name") String combo_name,@Param("project_name") String project_name);
+
+    List<PayCombo> getPayComboByProjectId(@Param("projectId") Integer projectId);
 }

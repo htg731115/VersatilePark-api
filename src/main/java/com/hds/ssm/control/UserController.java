@@ -38,6 +38,7 @@ public class UserController {
                     userRole.setProjectId(projectId);
                     session.setAttribute("userId",temp.getId());
                     session.setAttribute("projectId",projectId);
+                    session.setAttribute("userName",userRole.getName());
                 }
                      return userRole;
             }

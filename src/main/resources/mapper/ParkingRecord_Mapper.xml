@@ -69,7 +69,7 @@
 
 
     <select id="getPortRecordOut" resultType="com.hds.ssm.model.PortRQ">
-        SELECT id,project_id,plate_number,in_time,out_time,read_in_time,read_out_time
+        SELECT id,project_id,plate_number,in_time,out_time,read_in_time,read_out_time,src_img as 'imgSrc'
         FROM parking_record
         <if test="projectId!=null">
             where project_id=#{projectId}
@@ -78,7 +78,7 @@
         LIMIT 0,1
     </select>
     <select id="getPortRecordIn" resultType="com.hds.ssm.model.PortRQ">
-        SELECT id,project_id,plate_number,in_time,out_time,read_in_time,read_out_time
+        SELECT id,project_id,plate_number,in_time,out_time,read_in_time,read_out_time,src_img as 'imgSrc'
         FROM parking_record
         <if test="projectId!=null">
             where project_id=#{projectId}
@@ -113,6 +113,8 @@
         where in_time>DATE_SUB(CURDATE(), INTERVAL 5 MONTH)
         group by  DATE_FORMAT(in_time,'%Y%m')
     </select>
+
+
 
     <update id="alterPortPlateNum">
         UPDATE parking_record SET plate_number = #{plateNum} WHERE id = #{id}

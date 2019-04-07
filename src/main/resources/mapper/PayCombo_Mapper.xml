@@ -53,6 +53,13 @@
 
     </select>
 
+
+    <select id="getPayComboByProjectId" resultType="com.hds.ssm.model.PayCombo">
+        select * from pay_combo
+        where project_id = #{projectId}
+        and state != 0
+    </select>
+
     <update id="editPayCombo">
         UPDATE pay_combo p SET combo_name = #{combo_name},effective_length = #{effective_length},money = #{money}
         <if test="start_time != null">

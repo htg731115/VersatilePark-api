@@ -79,4 +79,14 @@ public class PortRQ {
     }
 
     private String projectName;
+
+    public String getImgSrc() {
+        return imgSrc;
+    }
+
+    public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc;
+    }
+
+    private String imgSrc;
 }

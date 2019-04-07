@@ -12,6 +12,15 @@ public class PayCombo {
     private Date end_time;
     private String combo_name;
 
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    private int state;
     public int getManager_id() {
         return manager_id;
     }

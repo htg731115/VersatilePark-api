@@ -1,6 +1,8 @@
 package com.hds.ssm.service.apiOcr;
 
 import com.baidu.aip.ocr.AipOcr;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
@@ -22,16 +24,20 @@ public class apiOcrService {
         client.setSocketTimeoutInMillis(60000);
 
     }
-    public void ocrPlateNumber(){
+    public String ocrPlateNumber(String image){
         HashMap<String, String> options = new HashMap<String, String>();
         options.put("multi_detect", "true");
 
 
         // 参数为本地路径
-        String image = "C:\\Users\\mu\\Desktop\\2.png";
         JSONObject res = client.plateLicense(image, options);
-        System.out.println(res.toString(2));
-
+        try {
+            JSONArray data = res.getJSONArray("words_result");
+            String plateNumber = data.getJSONObject(0).getString("number");
+            return plateNumber;
+        }catch (JSONException e){
+            return "bad";
+        }
     }
 
 }

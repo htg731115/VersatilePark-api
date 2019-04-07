@@ -71,4 +71,12 @@ public class PayComboServiceImpl implements PayComboService {
         PageInfo<PayComboListRQ> pageInfo = new PageInfo<>(payComboListRQS);
         return pageInfo;
     }
+
+    @Override
+    public PageInfo<PayCombo> getPayComboByProjectId(Integer projectId,Integer pageNum) {
+        PageHelper.startPage(pageNum,10);
+        List<PayCombo> payComboList = payComboDao.getPayComboByProjectId(projectId);
+        PageInfo<PayCombo> pageInfo = new PageInfo<>(payComboList);
+        return pageInfo;
+    }
 }

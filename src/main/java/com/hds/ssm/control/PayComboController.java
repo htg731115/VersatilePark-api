@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
@@ -75,6 +76,12 @@ public class PayComboController {
         return payComboService.searchComboByName(combo_name,project_name,pageNum,pageSize);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/manager-get-payCombo",method = RequestMethod.GET)
+    public PageInfo<PayCombo> managerGetPayCombo(HttpSession session,@RequestParam("pageNum")Integer pageNum){
+        Integer projectId = Integer.parseInt(session.getAttribute("projectId").toString());
+        return payComboService.getPayComboByProjectId(projectId,pageNum);
+    }
 //    @ResponseBody
 //    @RequestMapping(value = "/get-logCombo", method = RequestMethod.GET)
 //    public PageInfo<PayComboListRQ> getLogCombo(@RequestParam("combo_name") String comboName, @RequestParam("project_name") String projectName){
