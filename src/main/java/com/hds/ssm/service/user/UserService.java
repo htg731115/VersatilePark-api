@@ -12,7 +12,7 @@ public interface UserService {
     List<User> selectUsers();
     User findUser(String name);
     User findUserById(Integer id);
-    void addUser(String id,String name,String password);
+    int addUser(User user);
     UserRole getUserTypeById(Integer id);
     void changePassWord(Integer id, String password);
 }

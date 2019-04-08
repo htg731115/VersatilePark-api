@@ -29,6 +29,7 @@ public class ProjectController {
     public List<Project> GetAllProject(){
         return projectService.getAllProject();
     }
+
     @ResponseBody
     @RequestMapping(value="/getemptyproject",method = RequestMethod.GET)
     public List<Project> GetEmptyProject(){

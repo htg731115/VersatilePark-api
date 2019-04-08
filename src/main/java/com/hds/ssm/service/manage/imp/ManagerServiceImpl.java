@@ -46,4 +46,14 @@ public class ManagerServiceImpl implements ManagerService {
     public void updateManagerImg(String imgSrc, String managerId) {
         managerDao.updateManagerImg(imgSrc,managerId);
     }
+
+    @Override
+    public boolean canRegister(String phone) {
+        int count = managerDao.canRegister(phone);
+        if(count == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

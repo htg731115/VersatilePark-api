@@ -11,4 +11,7 @@ public interface CustomerDao {
     Integer GetTotal();
     Integer GetCertNum();
 
+    void addCustomer(@Param("useId") int useId,@Param("username") String username, @Param("phone") String phone, @Param("sex") String sex,@Param("idnumber") String idnumber);
+
+    Customer findCustomer(@Param("userId")Integer userId);
 }

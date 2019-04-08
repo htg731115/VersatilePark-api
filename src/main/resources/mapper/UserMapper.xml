@@ -22,9 +22,9 @@
         WHERE id = #{id}
     </select>
 
-    <select id="addUser" resultType="com.hds.ssm.model.User">
-        insert into user(id,name,password) values(#{id},#{name},#{password})
-    </select>
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.hds.ssm.model.User">
+        insert into user(name,user_name,password) values(#{name},#{user_name},#{password})
+    </insert>
 
     <select id="getUserTypeById" resultType="com.hds.ssm.model.UserRole">
       SELECT `user`.id as id,user_type,`user_name` as name

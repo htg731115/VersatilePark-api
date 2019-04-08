@@ -79,4 +79,32 @@ public class PayComboServiceImpl implements PayComboService {
         PageInfo<PayCombo> pageInfo = new PageInfo<>(payComboList);
         return pageInfo;
     }
+
+    @Override
+    public boolean payComboSell(Integer projectId,Integer managerId, Integer comboId) {
+        if(payComboDao.canSell(projectId)!=0){
+            return false; ///已經有上架套餐
+        }else {
+            payComboDao.sellPayCombo(managerId,comboId);
+            return true;
+        }
+    }
+
+    @Override
+    public void payComboUnsell(Integer comboId) {
+        payComboDao.unsellPayCombo(comboId);
+    }
+
+    @Override
+    public PageInfo<PayCombo> managerSearchComboByName(Integer projectId, String comboName, Integer pageNum) {
+        PageHelper.startPage(pageNum,10);
+        List<PayCombo> payComboList =  payComboDao.managerSearchComboByName(projectId,comboName);
+        PageInfo pageInfo = new PageInfo<>(payComboList);
+        return pageInfo;
+    }
+
+    @Override
+    public void managerAddPayCombo(Integer projectId, Integer managerId, String combo_name, int effective_length, double money, Date start_time, Date end_time) {
+        payComboDao.managerAddPayCombo(projectId,managerId,combo_name,effective_length,money,start_time,end_time);
+    }
 }

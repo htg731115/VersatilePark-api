@@ -14,6 +14,12 @@
         from manager_info m left join project_info p on(m.id=p.admin_id)
         where m.id=#{id}
     </select>
+
+    <select id="canRegister" resultType="java.lang.Integer">
+        select count(*)
+        from customer_info where c_phone = #{phone}
+    </select>
+
     <delete id="DelManager" >
         DELETE FROM manager_info WHERE id=#{id}
     </delete>
@@ -29,4 +35,5 @@
     <update id="updateManagerImg">
         update manager_info set img_src =#{imgSrc} where id =#{id}
     </update>
+
 </mapper>

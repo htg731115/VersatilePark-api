@@ -15,6 +15,16 @@ public interface PayComboDao {
     List<PayComboListRQ> getPaycomboList();
     void deletePayCombo(@Param("combo_id") Integer combo_id);
     List<PayComboListRQ> searchComboByName(@Param("combo_name") String combo_name,@Param("project_name") String project_name);
-
     List<PayCombo> getPayComboByProjectId(@Param("projectId") Integer projectId);
+    Integer canSell(@Param("projectId") Integer projectId);
+
+    void sellPayCombo(@Param("managerId")Integer managerId,@Param("comboId") Integer comboId);
+
+    void unsellPayCombo(@Param("comboId") Integer comboId);
+
+    List<PayCombo> managerSearchComboByName(@Param("projectId") Integer projectId,@Param("comboName") String comboName);
+
+    void managerAddPayCombo(@Param("projectId")Integer projectId, @Param("managerId")Integer managerId, @Param("combo_name")String combo_name,
+                            @Param("effective_length")int effective_length, @Param("money")double money, @Param("start_time")Date start_time,
+                            @Param("end_time")Date end_time);
 }

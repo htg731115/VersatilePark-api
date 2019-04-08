@@ -8,4 +8,8 @@ public interface CustomerService {
     PageInfo<Customer>GetCertCustomer(int pageNum);
     Integer GetTotal();
     Integer GetCertNum();
+
+    void addCustomer(int useId, String username, String phone, String sex, String idnumber);
+
+    Customer findCustomer(Integer userId);
 }

@@ -2,11 +2,13 @@ package com.hds.ssm.control;
 
 import com.github.pagehelper.PageInfo;
 import com.hds.ssm.model.Customer;
+import com.hds.ssm.model.User;
 import com.hds.ssm.service.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @CrossOrigin
@@ -41,4 +43,12 @@ public class CustomerController {
     {
         return customerService.GetCertNum();
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/user-get-phone-name",method = RequestMethod.GET)
+    public Customer userGetPhoneName(HttpSession session){
+        Integer userId = Integer.parseInt(session.getAttribute("customerId").toString());
+        return customerService.findCustomer(userId);
+    }
+
 }

@@ -82,6 +82,39 @@ public class PayComboController {
         Integer projectId = Integer.parseInt(session.getAttribute("projectId").toString());
         return payComboService.getPayComboByProjectId(projectId,pageNum);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/manager-search-payCombo",method = RequestMethod.GET)
+    public PageInfo<PayCombo> managerSearchPayCombo(HttpSession session,@RequestParam("pageNum")Integer pageNum,@RequestParam("comboName") String comboName){
+        Integer projectId = Integer.parseInt(session.getAttribute("projectId").toString());
+        return payComboService.managerSearchComboByName(projectId,comboName,pageNum);
+    }
+
+    //管理员添加临时套餐 没有上架的
+
+    @ResponseBody
+    @RequestMapping(value = "/manager-add-payCombo",method = RequestMethod.POST)
+    public void managerAddPayCombo(HttpSession session,@RequestBody PayCombo payCombo){
+        Integer projectId = Integer.parseInt(session.getAttribute("projectId").toString());
+        Integer managerId = Integer.parseInt(session.getAttribute("userId").toString());
+        payComboService.managerAddPayCombo(projectId,managerId,payCombo.getCombo_name(),payCombo.getEffective_length(),payCombo.getMoney(),payCombo.getStart_time(),payCombo.getEnd_time());
+    }
+
+//    套餐上架
+    @ResponseBody
+    @RequestMapping(value = "/paycombo-sell",method = RequestMethod.POST)
+    public boolean payComboSell(HttpSession session, @RequestParam("comboId") Integer comboId){
+        Integer managerId = Integer.parseInt(session.getAttribute("userId").toString());
+        Integer projectId = Integer.parseInt(session.getAttribute("projectId").toString());
+        return payComboService.payComboSell(projectId,managerId,comboId);
+    }
+
+//    套餐下架
+    @ResponseBody
+    @RequestMapping(value = "/paycombo-unsell",method = RequestMethod.POST)
+    public void payComboUnsell(@RequestParam("comboId") Integer comboId){
+        payComboService.payComboUnsell(comboId);
+    }
 //    @ResponseBody
 //    @RequestMapping(value = "/get-logCombo", method = RequestMethod.GET)
 //    public PageInfo<PayComboListRQ> getLogCombo(@RequestParam("combo_name") String comboName, @RequestParam("project_name") String projectName){

@@ -14,7 +14,7 @@ public interface UserDao {
     List<User> selectUsers();
     User findUser(@Param("name")String name);
     User findUserById(@Param("id") Integer id);
-    void addUser(@Param("id") String id,@Param("name")String name,@Param("password")String password);
+    int addUser(User user);
     UserRole getUserTypeById(@Param("id") Integer id);
     void changePassWord(@Param("id")Integer id,@Param("password") String password);
 

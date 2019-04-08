@@ -3,12 +3,15 @@ package com.hds.ssm.control;
 
 import com.hds.ssm.model.User;
 import com.hds.ssm.model.UserRole;
+import com.hds.ssm.service.customer.CustomerService;
+import com.hds.ssm.service.manage.ManagerService;
 import com.hds.ssm.service.project.ProjectService;
 import com.hds.ssm.service.user.UserService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import sun.misc.Request;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,7 +24,10 @@ public class UserController {
     private UserService UserService;
     @Autowired
     private ProjectService projectService;
-
+    @Autowired
+    private ManagerService managerService;
+    @Autowired
+    private CustomerService customerService;
     @ResponseBody
     @PostMapping("/login")
     public UserRole Login(@RequestBody User user,HttpSession session)
@@ -70,5 +76,43 @@ public class UserController {
         }
         return false;
     }
-}
+
+    @ResponseBody
+    @RequestMapping(value = "/can-register",method = RequestMethod.GET)
+    public boolean canRegister(@RequestParam("phone") String phone){
+        return managerService.canRegister(phone);
+    }
+    @ResponseBody
+    @RequestMapping(value = "/can-register2",method = RequestMethod.GET)
+    public boolean canRegister2(@RequestParam("name") String name){
+        User user = UserService.findUser(name);
+        if(null!=user){
+            return false;
+        }
+        return true;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/add-customer",method = RequestMethod.POST)
+    public void addCustomer(@RequestParam("phone") String phone,@RequestParam("name") String name,@RequestParam("username")String username,
+                                @RequestParam("password")String password,@RequestParam("sex")String sex, @RequestParam(value = "idnumber")String idnumber){
+       User user = new User();
+       user.setName(name);
+       user.setPassword(password);
+       user.setUser_name(username);
+       UserService.addUser(user);
+       customerService.addCustomer(user.getId(),username,phone,sex,idnumber);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/user-login",method = RequestMethod.POST)
+    public void userLogin(HttpSession session){
+        session.setAttribute("customerId",11);
+    }
+
+
+//    @RequestMapping
+//    @RequestMapping(value = "/add-customer",method = RequestMethod.POST)
+//    public boolean addCustomer(@RequestParam("phone")String phone, @RequestParam("name")String name, @RequestParam("password")String password)
+
+ }
 

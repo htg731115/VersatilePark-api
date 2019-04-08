@@ -19,4 +19,14 @@
         from customer_info c LEFT JOIN project_info p on (c.parking_id=p.id),certification
         where c_id=certification.id
     </select>
+
+    <select id="findCustomer" resultType="com.hds.ssm.model.Customer">
+        select *
+        from customer_info
+        where c_id = #{userId}
+    </select>
+
+    <insert id="addCustomer">
+        INSERT INTO customer_info (c_id,c_name,c_phone,sex,idnumber) values(#{useId},#{username},#{phone},#{sex},#{idnumber})
+    </insert>
 </mapper>

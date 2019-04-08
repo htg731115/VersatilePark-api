@@ -53,11 +53,27 @@
 
     </select>
 
+    <select id="managerSearchComboByName" resultType="com.hds.ssm.model.PayCombo">
+        SELECT
+            *
+        FROM
+            pay_combo
+        WHERE
+            project_id = #{projectId}
+        AND state != 0 AND combo_name LIKE '%${comboName}%'
+    </select>
+
 
     <select id="getPayComboByProjectId" resultType="com.hds.ssm.model.PayCombo">
         select * from pay_combo
         where project_id = #{projectId}
         and state != 0
+        order by state
+    </select>
+
+    <select id="canSell" resultType="java.lang.Integer">
+        select count(combo_id) from pay_combo
+        where state =1 and project_id = #{projectId}
     </select>
 
     <update id="editPayCombo">
@@ -71,6 +87,14 @@
         WHERE (`combo_id`=#{combo_id});
 
 
+    </update>
+
+    <update id="sellPayCombo">
+        update pay_combo set state = 1 ,manager_id = #{managerId}  where combo_id = #{comboId}
+    </update>
+
+    <update id="unsellPayCombo">
+        update pay_combo set state = 2 where combo_id = #{comboId}
     </update>
 
     <insert id="insertLogPayCombo">
@@ -90,8 +114,20 @@
            #{alter_time}
         )
     </insert>
-
-    <delete id="deletePayCombo" >
-        DELETE  FROM pay_combo where combo_id=#{combo_id}
-    </delete>
+    <insert id="managerAddPayCombo">
+       INSERT INTO pay_combo (project_id, effective_length, money, start_time, end_time,combo_name,manager_id,state)
+       values (
+          #{projectId},
+          #{effective_length},
+          #{money},
+          #{start_time},
+          #{end_time},
+          #{combo_name},
+          #{managerId},
+          2
+       )
+    </insert>
+    <update id="deletePayCombo" >
+        update pay_combo set state =0 where combo_id=#{combo_id}
+    </update>
 </mapper>

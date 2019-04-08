@@ -38,4 +38,14 @@ public class CustomerServiceImpl implements CustomerService {
     public Integer GetCertNum() {
         return customerDao.GetCertNum();
     }
+
+    @Override
+    public void addCustomer(int useId, String username, String phone, String sex, String idnumber) {
+         customerDao.addCustomer(useId,username,phone,sex,idnumber);
+    }
+
+    @Override
+    public Customer findCustomer(Integer userId) {
+        return customerDao.findCustomer(userId);
+    }
 }

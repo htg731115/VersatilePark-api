@@ -17,8 +17,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;//这里会报错，但是并不会影响
 
-    public void addUser(String id,String name,String password) {
-         userDao.addUser(id,name,password);
+    public int addUser(User user) {
+         return userDao.addUser(user);
     }
 
     @Override
