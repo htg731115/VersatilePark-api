@@ -27,4 +27,6 @@ public interface PayComboDao {
     void managerAddPayCombo(@Param("projectId")Integer projectId, @Param("managerId")Integer managerId, @Param("combo_name")String combo_name,
                             @Param("effective_length")int effective_length, @Param("money")double money, @Param("start_time")Date start_time,
                             @Param("end_time")Date end_time);
+
+    PayCombo getSellPayCombo(@Param("projectId")Integer projectId, @Param("date") Date date);
 }

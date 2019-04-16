@@ -100,6 +100,21 @@ public class PayComboController {
         payComboService.managerAddPayCombo(projectId,managerId,payCombo.getCombo_name(),payCombo.getEffective_length(),payCombo.getMoney(),payCombo.getStart_time(),payCombo.getEnd_time());
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/user-get-payCombo",method = RequestMethod.GET)
+    public PayCombo userGetPayCombo(@RequestParam("projectId")String projectId){
+        if("-1".equals(projectId)){
+            return payComboService.getCommonPayCombo();
+        }else{
+           PayCombo payCombo =   payComboService.getSellPayCombo(Integer.parseInt(projectId));
+            if(payCombo==null){
+                return payComboService.getCommonPayCombo();
+            }else {
+                return payCombo;
+            }
+        }
+    }
+
 //    套餐上架
     @ResponseBody
     @RequestMapping(value = "/paycombo-sell",method = RequestMethod.POST)

@@ -15,11 +15,6 @@ public class ApiOcrController {
     @Autowired
     apiOcrService apiOcrService;
     final  String pic_path = "D:\\VersatilePark-api\\target\\";
-    @ResponseBody
-    @RequestMapping("/helloWorld")
-    public String m(){
-        return apiOcrService.ocrPlateNumber("1");
-    }
 
     @ResponseBody
     @RequestMapping(value = "/ocr-platenumber",method = RequestMethod.GET)

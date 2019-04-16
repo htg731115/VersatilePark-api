@@ -107,4 +107,12 @@ public class PayComboServiceImpl implements PayComboService {
     public void managerAddPayCombo(Integer projectId, Integer managerId, String combo_name, int effective_length, double money, Date start_time, Date end_time) {
         payComboDao.managerAddPayCombo(projectId,managerId,combo_name,effective_length,money,start_time,end_time);
     }
+
+    @Override
+    public PayCombo getSellPayCombo(Integer projectId) {
+        Date date = new Date();
+        return payComboDao.getSellPayCombo(projectId,date);
+    }
+
+
 }

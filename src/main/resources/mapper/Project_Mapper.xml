@@ -10,6 +10,7 @@
            p.id,p.name, address, opentime ,area ,total_num, manage_num, state,m.name "managername"
         FROM
           project_info p left JOIN manager_info m on(p.admin_id=m.id)
+        order by state desc
     </select>
     <select id="getEmptyProject" resultType="com.hds.ssm.model.Project">
         SELECT

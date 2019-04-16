@@ -1,5 +1,7 @@
 package com.hds.ssm.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Evaluation {
@@ -46,6 +48,8 @@ public class Evaluation {
     private int customer_id;
     private int project_id;
     private int degress;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH时mm分ss秒")
     private Date create_time;
     private int handler_status;
 

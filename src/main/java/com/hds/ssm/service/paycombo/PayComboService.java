@@ -26,4 +26,6 @@ public interface PayComboService {
     PageInfo<PayCombo> managerSearchComboByName(Integer projectId, String comboName, Integer pageNum);
 
     void managerAddPayCombo(Integer projectId, Integer managerId, String combo_name, int effective_length, double money, Date start_time, Date end_time);
+
+    PayCombo getSellPayCombo(Integer projectId);
 }

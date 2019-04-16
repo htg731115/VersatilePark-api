@@ -1,5 +1,7 @@
 package com.hds.ssm.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class PayCombo {
@@ -95,6 +97,7 @@ public class PayCombo {
         this.alter_time = alter_time;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH时mm分ss秒")
     public Date alter_time;
 
     public int getId() {
