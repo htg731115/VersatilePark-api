@@ -48,4 +48,12 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer findCustomer(Integer userId) {
         return customerDao.findCustomer(userId);
     }
+
+    @Override
+    public void commitCert(String idNumber, Integer userId, String imgSrc, String projectId, String state) {
+        customerDao.commitCert(idNumber,userId,imgSrc,projectId,state);
+
+    }
+
+
 }

@@ -39,5 +39,26 @@ public class apiOcrService {
             return "bad";
         }
     }
+    public String ocrIdNumber(String image){
+        HashMap<String, String> options = new HashMap<String, String>();
+        options.put("detect_direction", "true");
+        options.put("detect_risk", "false");
+        options.put("id_card_side", "front");
+        String idCardSide = "back";
+
+        // 参数为本地路径
+        JSONObject res = client.idcard(image, idCardSide, options);
+            System.out.println(res.toString(2));
+        try {
+            JSONObject data = res.getJSONObject("words_result");
+            String idNumber = data.getJSONObject("公民身份号码").getString("words");
+            if(idNumber.equals("")){
+                return "bad";
+            }
+            return idNumber;
+        }catch(JSONException e){
+            return "bad";
+        }
+    }
 
 }

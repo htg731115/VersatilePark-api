@@ -29,4 +29,7 @@
     <insert id="addCustomer">
         INSERT INTO customer_info (c_id,c_name,c_phone,sex,idnumber) values(#{useId},#{username},#{phone},#{sex},#{idnumber})
     </insert>
+    <insert id="commitCert">
+        INSERT INTO certification ()
+    </insert>
 </mapper>

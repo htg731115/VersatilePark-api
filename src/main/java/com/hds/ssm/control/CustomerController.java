@@ -51,4 +51,12 @@ public class CustomerController {
         return customerService.findCustomer(userId);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/commitCert",method = RequestMethod.POST)
+    public void commitCert(String idNumber,String imgSrc,String state,String projectId,HttpSession session){
+
+        Integer userId = Integer.parseInt(session.getAttribute("customerId").toString());
+        customerService.commitCert(idNumber,userId,imgSrc,projectId,state);
+
+    }
 }

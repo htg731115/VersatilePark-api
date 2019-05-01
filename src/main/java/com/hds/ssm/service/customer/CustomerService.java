@@ -12,4 +12,6 @@ public interface CustomerService {
     void addCustomer(int useId, String username, String phone, String sex, String idnumber);
 
     Customer findCustomer(Integer userId);
+
+    void commitCert(String idNumber, Integer userId, String imgSrc,String projectId,String state);
 }
