@@ -3,6 +3,8 @@ package com.hds.ssm.service.customer;
 import com.github.pagehelper.PageInfo;
 import com.hds.ssm.model.Customer;
 
+import java.util.Map;
+
 public interface CustomerService {
     PageInfo<Customer> GetCustomer(int pageNum);
     PageInfo<Customer>GetCertCustomer(int pageNum);
@@ -13,5 +15,7 @@ public interface CustomerService {
 
     Customer findCustomer(Integer userId);
 
-    void commitCert(String idNumber, Integer userId, String imgSrc,String projectId,String state);
+    void commitCert(String idNumber, Integer userId, String imgSrc,String projectId,String state,String plateNumber);
+
+    Map adjustCert(Integer userId);
 }

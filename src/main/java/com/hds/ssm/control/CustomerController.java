@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RequestMapping("/api")
@@ -53,10 +54,18 @@ public class CustomerController {
 
     @ResponseBody
     @RequestMapping(value = "/commitCert",method = RequestMethod.POST)
-    public void commitCert(String idNumber,String imgSrc,String state,String projectId,HttpSession session){
-
+    public void commitCert(String idNumber,String imgSrc,String projectId,String plateNumber,HttpSession session){
+        String state ="0";
         Integer userId = Integer.parseInt(session.getAttribute("customerId").toString());
-        customerService.commitCert(idNumber,userId,imgSrc,projectId,state);
+        customerService.commitCert(idNumber,userId,imgSrc,projectId,state,plateNumber);
 
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/adjust-cert",method = RequestMethod.GET)
+    public Map adjustCert(HttpSession session){
+        Integer userId = Integer.parseInt(session.getAttribute("customerId").toString());
+        Map status = customerService.adjustCert(userId);
+        return status;
     }
 }

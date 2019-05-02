@@ -1,6 +1,6 @@
 package com.hds.ssm.control;
 
-import com.baidu.aip.ocr.AipOcr;
+import com.hds.ssm.model.CertRP;
 import com.hds.ssm.service.apiOcr.apiOcrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import sun.misc.BASE64Encoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -33,10 +31,12 @@ public class ApiOcrController {
 
     @ResponseBody
     @RequestMapping(value = "/ocr-idnumber",method = RequestMethod.POST)
-    public String managerUploadImg(MultipartFile file, HttpServletRequest request) throws IOException {
+    public CertRP managerUploadImg(MultipartFile file, HttpServletRequest request) throws IOException {
         HttpSession session = request.getSession();
         String pic_path = "D:\\VersatilePark-api\\target\\idNumber\\";
+        CertRP certRP = new CertRP();
         String filename = file.getOriginalFilename();
+        certRP.setCode("400");
             //上传图片
             if(file!=null && filename!=null && filename.length()>0) {
                 //新的图片名称
@@ -45,8 +45,11 @@ public class ApiOcrController {
                 File newFile = new File(pic_path + newFileName);
                 //将内存中的数据写入磁盘
                 file.transferTo(newFile);
-                return apiOcrService.ocrIdNumber(newFile.getAbsolutePath());
+                certRP.setIdNumber(apiOcrService.ocrIdNumber(newFile.getAbsolutePath()));
+                certRP.setImgSrc("idNumber/" + newFileName);
+                certRP.setCode("200");
+                return certRP;
             }
-        return "bad";
+        return certRP;
     }
 }

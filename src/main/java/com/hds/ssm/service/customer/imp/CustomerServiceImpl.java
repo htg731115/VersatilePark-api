@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+
 @Service(value="CustomerService")
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
@@ -50,9 +52,15 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void commitCert(String idNumber, Integer userId, String imgSrc, String projectId, String state) {
-        customerDao.commitCert(idNumber,userId,imgSrc,projectId,state);
+    public void commitCert(String idNumber, Integer userId, String imgSrc, String projectId, String state,String plateNumber) {
+        customerDao.commitCert(userId,imgSrc,projectId,state);
+        customerDao.customerCertChange(userId,idNumber,projectId,plateNumber);
 
+    }
+
+    @Override
+    public Map adjustCert(Integer userId) {
+        return customerDao.adjustCert(userId);
     }
 
 

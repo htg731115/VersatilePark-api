@@ -25,11 +25,23 @@
         from customer_info
         where c_id = #{userId}
     </select>
-
+    <select id="adjustCert" resultType="java.util.HashMap">
+        select status,p.name,idnumber,plate_num
+        from  certification cert left join customer_info customer on(cert.customer_id=customer.c_id) ,
+				project_info p
+        where customer_id=11
+        and project_id =p.id
+        order by submit_time desc
+        limit 1
+    </select>
+    <update id="customerCertChange">
+        update customer_info set plate_num =#{plateNumber},parking_id = #{projectId},idnumber =#{idNumber} where c_id = #{customer_id}
+    </update>
     <insert id="addCustomer">
         INSERT INTO customer_info (c_id,c_name,c_phone,sex,idnumber) values(#{useId},#{username},#{phone},#{sex},#{idnumber})
     </insert>
     <insert id="commitCert">
-        INSERT INTO certification ()
+        INSERT INTO certification (project_id,img_src,customer_id,submit_time) values(#{projectId},#{imgSrc},#{customer_id},now())
     </insert>
+
 </mapper>

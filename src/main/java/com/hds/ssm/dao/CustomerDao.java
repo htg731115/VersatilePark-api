@@ -4,6 +4,7 @@ import com.hds.ssm.model.Customer;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CustomerDao {
     List<Customer> GetCustomer();
@@ -15,5 +16,9 @@ public interface CustomerDao {
 
     Customer findCustomer(@Param("userId")Integer userId);
 
-    void commitCert(@Param("idNumber") String idNumber, @Param("userId") Integer userId, @Param("state") String state,@Param("projectId") String projectId, @Param("imgSrc") String imgSrc);
+    void commitCert( @Param("customer_id") Integer userId,@Param("imgSrc") String imgSrc, @Param("projectId") String projectId, @Param("state") String state);
+
+    void customerCertChange(@Param("customer_id") Integer userId,@Param("idNumber") String idNumber,@Param("projectId") String projectId,@Param("plateNumber") String plateNumber);
+
+    Map adjustCert(@Param("customer_id") Integer userId);
 }
