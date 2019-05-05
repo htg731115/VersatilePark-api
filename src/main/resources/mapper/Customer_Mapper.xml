@@ -43,5 +43,7 @@
     <insert id="commitCert">
         INSERT INTO certification (project_id,img_src,customer_id,submit_time) values(#{projectId},#{imgSrc},#{customer_id},now())
     </insert>
-
+    <insert id="commitEvaluation">
+        INSERT INTO evaluation (customer_id,project_id,degress,content,handler_status,create_time) values(#{customer_id},#{projectId},#{degress},#{content},1,now())
+    </insert>
 </mapper>

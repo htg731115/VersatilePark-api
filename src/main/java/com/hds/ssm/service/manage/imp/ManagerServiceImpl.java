@@ -56,4 +56,9 @@ public class ManagerServiceImpl implements ManagerService {
             return false;
         }
     }
+
+    @Override
+    public void addManager(Manager manager) {
+        managerDao.addManager(manager.getId(),manager.getName(),manager.getSex(),manager.getId_Num(),manager.getPhone_Num());
+    }
 }

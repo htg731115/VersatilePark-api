@@ -18,4 +18,6 @@ public interface CustomerService {
     void commitCert(String idNumber, Integer userId, String imgSrc,String projectId,String state,String plateNumber);
 
     Map adjustCert(Integer userId);
+
+    void commitEvaluation(Integer userId, String projectId, Integer degress, String content);
 }

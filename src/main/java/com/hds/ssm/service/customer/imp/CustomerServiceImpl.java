@@ -63,5 +63,10 @@ public class CustomerServiceImpl implements CustomerService {
         return customerDao.adjustCert(userId);
     }
 
+    @Override
+    public void commitEvaluation(Integer userId, String projectId, Integer degress, String content) {
+        customerDao.commitEvaluation(userId,projectId,degress,content);
+    }
+
 
 }

@@ -68,4 +68,11 @@ public class CustomerController {
         Map status = customerService.adjustCert(userId);
         return status;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/commit-evaluation",method = RequestMethod.POST)
+    public void commitEvaluation(HttpSession session,String projectId,String content,Integer degress){
+        Integer userId = Integer.parseInt(session.getAttribute("customerId").toString());
+        customerService.commitEvaluation(userId,projectId,degress,content);
+    }
 }

@@ -1,6 +1,7 @@
 package com.hds.ssm.control;
 
 
+import com.hds.ssm.model.Manager;
 import com.hds.ssm.model.User;
 import com.hds.ssm.model.UserRole;
 import com.hds.ssm.service.customer.CustomerService;
@@ -109,6 +110,30 @@ public class UserController {
         session.setAttribute("customerId",11);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/addManager",method = RequestMethod.POST)
+    public Integer addManager(String name,String userName,String password,String idNum,String phoneNum,String sex){
+        User user = UserService.findUser(name);
+        if(null !=user){
+            return 1;//用户名重复
+        }
+        else{
+            User user1 = new User();
+            user1.setName(name);
+            user1.setPassword(password);
+            user1.setUser_name(userName);
+            Manager manager = new Manager();
+            manager.setId_Num(idNum);
+            manager.setPhone_Num(phoneNum);
+            manager.setName(userName);
+            manager.setSex(Integer.parseInt(sex));
+            UserService.addUser(user1);
+            int id = user1.getId();
+            manager.setId(id);
+            managerService.addManager(manager);
+            return 2;
+        }
+    }
 
 //    @RequestMapping
 //    @RequestMapping(value = "/add-customer",method = RequestMethod.POST)

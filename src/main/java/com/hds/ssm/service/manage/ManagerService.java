@@ -15,4 +15,6 @@ public interface ManagerService {
     void updateManagerImg(String imgSrc, String managerId);
 
     boolean canRegister(String phone);
+
+    void addManager(Manager manager);
 }

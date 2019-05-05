@@ -6,7 +6,7 @@
         select * from manager_info
     </select>
     <select id="GetManager2" resultType="com.hds.ssm.model.Manager">
-       select m.id id ,m.name ,p.address Project
+       select m.id id ,m.name ,p.address Project,img_src as'imgSrc'
         from manager_info m left join project_info p on(m.id=p.admin_id)
     </select>
     <select id="FindManager" resultType="com.hds.ssm.model.Manager">
@@ -35,5 +35,7 @@
     <update id="updateManagerImg">
         update manager_info set img_src =#{imgSrc} where id =#{id}
     </update>
-
+    <insert id="addManager">
+        INSERT INTO manager_info (id,name,sex,id_Num,in_time,Phone_Num) values (#{id},#{name},#{sex},#{idNum},now(),#{phoneNum})
+    </insert>
 </mapper>

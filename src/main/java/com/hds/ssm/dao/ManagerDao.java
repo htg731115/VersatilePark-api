@@ -17,4 +17,6 @@ public interface ManagerDao {
     void updateManagerImg(@Param("imgSrc") String imgSrc,@Param("id") String managerId);
 
     int canRegister(@Param("phone") String phone);
+
+    void addManager(@Param("id")Integer id,@Param("name") String name, @Param("sex") int sex,@Param("idNum") String id_num,@Param("phoneNum") String phone_num);
 }
