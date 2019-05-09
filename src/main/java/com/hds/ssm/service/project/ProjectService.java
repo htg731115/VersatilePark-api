@@ -23,4 +23,6 @@ public interface ProjectService {
     Project findProjectById(int id);
     Project findProjectByAdminId(int adminId);
     void editProject(Integer projectId, String name, String address, Integer area,Integer manageNum);
+
+    void alterProject(Integer projectId, String name, String address, Integer area, Integer totalNum, boolean state);
 }

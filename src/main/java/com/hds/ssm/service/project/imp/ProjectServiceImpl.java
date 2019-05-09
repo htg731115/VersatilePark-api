@@ -66,4 +66,9 @@ public class ProjectServiceImpl implements ProjectService{
         projectDao.editProject(projectId,name,address,area,manageNum);
     }
 
+    @Override
+    public void alterProject(Integer projectId, String name, String address, Integer area, Integer totalNum, boolean state) {
+        projectDao.alterProject2(projectId,name,address,area,totalNum,state);
+    }
+
 }

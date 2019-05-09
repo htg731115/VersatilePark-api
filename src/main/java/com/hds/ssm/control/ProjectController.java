@@ -77,5 +77,11 @@ public class ProjectController {
                             @RequestParam("area") Integer area,@RequestParam("manageNum") Integer manageNum){
         projectService.editProject(projectId,name,address,area,manageNum);
     }
+    @ResponseBody
 
+    @RequestMapping(value = "/commit-alter-project",method = RequestMethod.POST)//修改停車項目
+    public void alterProject(@RequestParam("projectId") Integer projectId,@RequestParam("name") String name, @RequestParam("address") String address,
+                            @RequestParam("area") Integer area,@RequestParam("total_num") Integer totalNum,@RequestParam("state") boolean state ){
+        projectService.alterProject(projectId,name,address,area,totalNum,state);
+    }
 }

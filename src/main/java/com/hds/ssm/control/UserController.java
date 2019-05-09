@@ -1,6 +1,7 @@
 package com.hds.ssm.control;
 
 
+import com.hds.ssm.model.Customer;
 import com.hds.ssm.model.Manager;
 import com.hds.ssm.model.User;
 import com.hds.ssm.model.UserRole;
@@ -46,7 +47,7 @@ public class UserController {
                 map.put("name",temp.getUser_name());
                 map.put("id",temp.getId());
                 session.setAttribute("userId",temp.getId());
-                session.setAttribute("userName",userRole.getName());
+                session.setAttribute("userName",temp.getUser_name());
                 if(null!=userRole)//该用户为项目管理员
                 {
                     Integer projectId =  projectService.findProjectByAdminId(userRole.getId()).getId();
@@ -54,7 +55,7 @@ public class UserController {
                     map.put("user_Type",1);
                     map.put("projectId",projectId);
                 }
-                else{
+                else if(null==customerService.findCustomer(temp.getId())){
                     map.put("user_Type",0);
                 }
                 return map ;
@@ -125,20 +126,27 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/user-login",method = RequestMethod.POST)
-    public String  userLogin(HttpSession session,@RequestBody User user){
+    public Map  userLogin(HttpSession session,@RequestBody User user){
         User temp=UserService.findUser(user.getName());
-        if(null!=temp)
+        Map map = new HashMap();
+        Customer customer = customerService.findCustomer(temp.getId());
+        if(null!=temp&&null!=customer)
         {
             if(temp.getPassword().equals(user.getPassword()))
             {
                 session.setAttribute("customerId",temp.getId());
-                return "2";//登录成功
+                map.put("code",2);
+                map.put("id",temp.getId());
+                map.put("type",2);
+                return map;//登录成功
             }else{
-                return "1";// 账号密码错误
+                map.put("code",1);
+                return map;// 账号密码错误
             }
 
         }
-        return "0";//该账号不存在
+        map.put("code",0);
+        return map;
     }
 
     @ResponseBody

@@ -41,6 +41,16 @@
         INSERT INTO project_info (`name`, `address`, `opentime`, `area`, `total_num`, `manage_num`, `state`, `admin_id`)
         VALUES (#{name},#{address},#{opentime},#{area},#{total_num},#{manage_num},#{state},#{admin_id});
     </insert>
+    <update id="alterProject2">
+          UPDATE project_info set
+            NAME = #{name},
+            address =#{address},
+            area = #{area},
+            total_num = #{totalNum},
+            state = #{state}
+        WHERE
+            id =#{projectId}
+    </update>
     <update id="clearProject">
         UPDATE project_info SET admin_id=0 where admin_id=#{admin_id}
     </update>
