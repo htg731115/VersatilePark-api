@@ -13,8 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sun.misc.Request;
+import sun.security.timestamp.HttpTimestamper;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Controller
@@ -31,27 +34,43 @@ public class UserController {
     private CustomerService customerService;
     @ResponseBody
     @PostMapping("/login")
-    public UserRole Login(@RequestBody User user,HttpSession session)
+    public Map Login(@RequestBody User user, HttpSession session)
     {
+        Map map = new HashMap();
         User temp=UserService.findUser(user.getName());
         if(null!=temp)
         {
             if(temp.getPassword().equals(user.getPassword()))
             {
-                UserRole userRole = UserService.getUserTypeById(temp.getId());
-                if(userRole.getUser_Type()==1)//该用户为项目管理员
+                Manager userRole = managerService.FindManage(temp.getId());
+                map.put("name",temp.getUser_name());
+                map.put("id",temp.getId());
+                session.setAttribute("userId",temp.getId());
+                session.setAttribute("userName",userRole.getName());
+                if(null!=userRole)//该用户为项目管理员
                 {
                     Integer projectId =  projectService.findProjectByAdminId(userRole.getId()).getId();
-                    userRole.setProjectId(projectId);
-                    session.setAttribute("userId",temp.getId());
                     session.setAttribute("projectId",projectId);
-                    session.setAttribute("userName",userRole.getName());
+                    map.put("user_Type",1);
+                    map.put("projectId",projectId);
                 }
-                     return userRole;
+                else{
+                    map.put("user_Type",0);
+                }
+                return map ;
             }
         }
         return null;
     }
+    @ResponseBody
+    @RequestMapping(value = "/loginOut",method = RequestMethod.POST)
+    public void loginOut(HttpSession session){
+        session.removeAttribute("user_Type");
+        session.removeAttribute("projectId");
+        session.removeAttribute("userId");
+        session.removeAttribute("userName");
+    }
+
     @ResponseBody
     @PostMapping("/addUser")
     public int addUser(@RequestBody User user){
@@ -106,8 +125,20 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/user-login",method = RequestMethod.POST)
-    public void userLogin(HttpSession session){
-        session.setAttribute("customerId",11);
+    public String  userLogin(HttpSession session,@RequestBody User user){
+        User temp=UserService.findUser(user.getName());
+        if(null!=temp)
+        {
+            if(temp.getPassword().equals(user.getPassword()))
+            {
+                session.setAttribute("customerId",temp.getId());
+                return "2";//登录成功
+            }else{
+                return "1";// 账号密码错误
+            }
+
+        }
+        return "0";//该账号不存在
     }
 
     @ResponseBody

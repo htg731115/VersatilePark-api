@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class ProjectController {
         String PName=project.getName();
         Project temp =projectService.findProject(PName);
         if(null==temp) {
-            projectService.addProject(project.getName(), project.getAddress(), project.getOpentime(), project.getArea(), project.getTotal_num(), project.getManage_num(), project.getState(), project.getAdmin_id());
+            projectService.addProject(project.getName(), project.getAddress(), new Date(), project.getArea(), project.getTotal_num(), project.getManage_num(), project.getState(), project.getAdmin_id());
             return true;
         }
         return false;
