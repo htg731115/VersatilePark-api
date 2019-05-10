@@ -20,4 +20,9 @@ public interface CustomerService {
     Map adjustCert(Integer userId);
 
     void commitEvaluation(Integer userId, String projectId, Integer degress, String content);
+
+
+    void alterCustomer(Integer customerId, String phone, String plateNum, String idnumber, Integer sex);
+
+    PageInfo<Customer> searchCustomerByName(int pageNum, String name);
 }

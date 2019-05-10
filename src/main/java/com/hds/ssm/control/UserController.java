@@ -50,10 +50,12 @@ public class UserController {
                 session.setAttribute("userName",temp.getUser_name());
                 if(null!=userRole)//该用户为项目管理员
                 {
-                    Integer projectId =  projectService.findProjectByAdminId(userRole.getId()).getId();
-                    session.setAttribute("projectId",projectId);
+                    if(null!=projectService.findProjectByAdminId(userRole.getId())){
+                      Integer projectId =  projectService.findProjectByAdminId(userRole.getId()).getId();
+                        session.setAttribute("projectId",projectId);
+                        map.put("projectId",projectId);
+                    }
                     map.put("user_Type",1);
-                    map.put("projectId",projectId);
                 }
                 else if(null==customerService.findCustomer(temp.getId())){
                     map.put("user_Type",0);

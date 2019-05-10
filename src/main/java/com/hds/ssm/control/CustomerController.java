@@ -75,4 +75,19 @@ public class CustomerController {
         Integer userId = Integer.parseInt(session.getAttribute("customerId").toString());
         customerService.commitEvaluation(userId,projectId,degress,content);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/alter-customer",method = RequestMethod.POST)
+    public void alterCustomer(Integer customerId, String phone,Integer sex,String plateNum,String idnumber){
+        customerService.alterCustomer(customerId,phone,plateNum,idnumber,sex);
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/search-customer-name", method = RequestMethod.GET)
+    public PageInfo<Customer> SearchCustomerByName(@RequestParam("pageNum") int pageNum,String name)
+    {
+        return customerService.searchCustomerByName(pageNum,name);
+    }
+
 }

@@ -68,5 +68,18 @@ public class CustomerServiceImpl implements CustomerService {
         customerDao.commitEvaluation(userId,projectId,degress,content);
     }
 
+    @Override
+    public void alterCustomer(Integer customerId, String phone, String plateNum, String idnumber, Integer sex) {
+        customerDao.alterCustomer(customerId,phone,plateNum,idnumber,sex);
+    }
+
+    @Override
+    public PageInfo<Customer> searchCustomerByName(int pageNum, String name) {
+        PageHelper.startPage(pageNum,10);
+        List<Customer> customers = this.customerDao.searchCustomerByName(name);
+        PageInfo<Customer> pageInfo = new PageInfo<>(customers);
+        return pageInfo;
+    }
+
 
 }

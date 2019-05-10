@@ -23,4 +23,9 @@ public interface CustomerDao {
     Map adjustCert(@Param("customer_id") Integer userId);
 
     void commitEvaluation(@Param("customer_id") Integer userId,@Param("projectId")  String projectId,@Param("degress")  Integer degress,@Param("content")  String content);
+
+    void alterCustomer(@Param("customer_id") Integer customerId,@Param("phone")  String phone, @Param("plateNum") String plateNum,
+                       @Param("idnumber") String idnumber,@Param("sex")  Integer sex);
+
+    List<Customer> searchCustomerByName(@Param("name") String name);
 }

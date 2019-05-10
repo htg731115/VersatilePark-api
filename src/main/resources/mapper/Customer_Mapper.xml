@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hds.ssm.dao.CustomerDao">
     <select id="GetCustomer" resultType="com.hds.ssm.model.Customer">
-        select c_id,c_name,c_phone,sex,plate_num,p.name 'project'
+        select c_id,c_name,c_phone,sex,plate_num,p.name 'project',c.idnumber
         from customer_info c LEFT JOIN project_info p on (c.parking_id=p.id)
     </select>
     <select id="GetTotal" resultType="java.lang.Integer">
@@ -15,7 +15,7 @@
         where status=2
     </select>
     <select id="GetCertCustomer" resultType="com.hds.ssm.model.Customer">
-      select DISTINCT(c_id),c_name,c_phone,sex,plate_num,p.name 'project'
+      select DISTINCT(c_id),c_name,c_phone,sex,plate_num,p.name 'project',c.idnumber
         from customer_info c LEFT JOIN project_info p on (c.parking_id=p.id),certification
         where c_id=certification.customer_id
     </select>
@@ -34,8 +34,17 @@
         order by submit_time desc
         limit 1
     </select>
+
+    <select id="searchCustomerByName" resultType="com.hds.ssm.model.Customer">
+        select c_id,c_name,c_phone,sex,plate_num,p.name 'project',c.idnumber
+        from customer_info c LEFT JOIN project_info p on (c.parking_id=p.id)
+        where c_name like '%${name}%'
+    </select>
     <update id="customerCertChange">
         update customer_info set plate_num =#{plateNumber},parking_id = #{projectId},idnumber =#{idNumber} where c_id = #{customer_id}
+    </update>
+    <update id="alterCustomer">
+        update customer_info set idnumber = #{idnumber},c_phone = #{phone},plate_num = #{plateNum} where c_id = #{customer_id}
     </update>
     <insert id="addCustomer">
         INSERT INTO customer_info (c_id,c_name,c_phone,sex,idnumber) values(#{useId},#{username},#{phone},#{sex},#{idnumber})
@@ -46,4 +55,6 @@
     <insert id="commitEvaluation">
         INSERT INTO evaluation (customer_id,project_id,degress,content,handler_status,create_time) values(#{customer_id},#{projectId},#{degress},#{content},1,now())
     </insert>
+
+
 </mapper>

@@ -38,6 +38,16 @@ public class Customer {
     private String c_phone;
     private String plate_num;
 
+    public String getIdnumber() {
+        return idnumber;
+    }
+
+    public void setIdnumber(String idnumber) {
+        this.idnumber = idnumber;
+    }
+
+    private String idnumber;
+
     public int getSex() {
         return Sex;
     }
